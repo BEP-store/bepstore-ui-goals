@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: 'bepstore-ui-goals'
+  name: 'bepstore-goals'
 };
