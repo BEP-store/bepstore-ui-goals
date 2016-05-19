@@ -1,4 +1,4 @@
-import ActivitiesBaseIconView from 'feedbackfruits/components/activities/base/icon-view';
+import ActivitiesBaseIconView from 'feedbackfruits-activities/components/icon-view';
 
 export default ActivitiesBaseIconView.extend({
 

@@ -2,5 +2,9 @@
 'use strict';
 
 module.exports = {
-  name: 'bepstore-goals'
+  name: 'bepstore-goals',
+
+  isDevelopingAddon: function() {
+    return true;
+  }
 };
