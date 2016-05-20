@@ -1,7 +1,9 @@
+import layout from 'bepstore-goals/templates/components/badge/status-badge';
 import Ember from 'ember';
-import statuses from '../../utils/statuses';
+import statuses from 'bepstore-goals/utils/statuses';
 
 export default Ember.Component.extend({
+  layout,
   _statusStyle: Ember.computed('status', 'size', function() {
     let size = this.get('size');
     let color = this.get('status');

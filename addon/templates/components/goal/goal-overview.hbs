@@ -1,8 +1,8 @@
 <div class=goal_container>
   <div class="goal_con_upper" {{action "showDescr"}}>
     <div class="goal_title goal_left">
-      {{goal.title}}
-      {{badge/status-badge status=goal.progress size="small"}}
+      {{model.title}}
+      {{component 'bepstore-goals@badge/status-badge' status=model.progress size="small"}}
     </div>
     <div class="goal_volunteers goal_right">
       Volunteers: 42
@@ -11,10 +11,10 @@
   {{#if showAll}}
   <div class="goal_con_lower">
     <div class="goal_descr goal_left">
-      <p>{{goal.description}}</p>
+      <p>{{model.description}}</p>
     </div>
     <div class="goal_coret goal_right">
-      {{goal/core-team team=goal}}
+      {{component 'bepstore-goals@goal/core-team' team=model}}
     </div>
   </div>
   {{/if}}
