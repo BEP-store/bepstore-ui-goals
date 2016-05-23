@@ -3,7 +3,7 @@ import { belongsTo, hasMany } from 'ember-data/relationships';
 import attr from 'ember-data/attr';
 import Ember from 'ember';
 
-const { computed: { filterBy } } = Ember;
+const { computed } = Ember;
 
 export default Activity.extend({
   engine: attr('string', { defaultValue: 'goals' }),
@@ -26,12 +26,14 @@ export default Activity.extend({
   progress: attr('string'),
   updateText: attr('string'),
 
-  contributers: hasMany('user'),
+  contributors: hasMany('user'),
 
   product_owner: belongsTo('user', { inverse: null }),
   head_design: belongsTo('user', { inverse: null }),
   head_frontend: belongsTo('user', { inverse: null }),
   head_backend: belongsTo('user', { inverse: null }),
 
-  nr_volunteers: filterBy('user').length
+  contributorsCount: computed('contributors', function() {
+  return this.get('contributors').length;
+  })
 });
