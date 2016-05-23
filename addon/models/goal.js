@@ -1,4 +1,4 @@
-import Activity from 'bepstore/models/activity';
+import Activity from 'feedbackfruits-activities/models/activity';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 import attr from 'ember-data/attr';
 import Ember from 'ember';
