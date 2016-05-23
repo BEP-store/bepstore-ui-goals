@@ -1,1 +1,29 @@
-Test!!!
+{{#fbf-modal}}
+  <div class="fbf-modal__header--style-dark">
+      {{#fbf-item}}
+        <div class="fbf-item__primary-icon" {{action 'dismiss'}}>
+          {{#fbf-icon}}close{{/fbf-icon}}
+        </div>
+        <div class="fbf-item__content">
+          {{#fbf-text title=true light=true}}
+            Request a Feature!
+          {{/fbf-text}}
+        </div>
+      {{/fbf-item}}
+  </div>
+  <div class="fbf-modal__content">
+    {{#fbf-text}}
+      To request a feature, you need to describe the feature in a few words. In the description, you can give more details about the requirements the feature must have, or how the feature must work.
+    {{/fbf-text}}
+    {{fbf-textfield fullwidth=true label="Title" value=model.title}}
+    {{fbf-textarea fullwidth=true label='Description' rows=5 value=model.description }}
+  </div>
+  <div class="fbf-modal__footer">
+    {{#fbf-btn isColored=true disabled=model.isSaving action='dismiss'}}
+      Discard
+    {{/fbf-btn}}
+    {{#fbf-btn isColored=true disabled=saveDisabled action='save'}}
+      Publish
+    {{/fbf-btn}}
+  </div>
+{{/fbf-modal}}
