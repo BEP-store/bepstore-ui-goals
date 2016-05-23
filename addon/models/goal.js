@@ -8,6 +8,10 @@ const { computed } = Ember;
 export default Activity.extend({
   engine: attr('string', { defaultValue: 'goals' }),
 
+  created_at: attr('moment'),
+
+  updated_at: attr('moment'),
+
   /**
  * The title of the doc
  *
