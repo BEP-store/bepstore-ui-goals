@@ -1,0 +1,19 @@
+{{#fbf-item borderTop=true}}
+  <div class="fbf-item__primary-icon fbf-item--center-content-horizontally">
+    {{activities/icon-view model=model type=model.type}}
+  </div>
+  <div class="fbf-item__content">
+    {{#fbf-text lines=2}}
+      The goal "With FeedbackFruits platform I would like to: {{model.title}}" was updated!
+    {{/fbf-text}}
+    {{#fbf-meta-text}}
+      {{#fbf-text light=true lines=1}}
+        {{model.title}}
+      {{/fbf-text}}
+      {{fbf-text-divider}}
+      {{#fbf-text light=true}}
+        Just now
+      {{/fbf-text}}
+    {{/fbf-meta-text}}
+  </div>
+{{/fbf-item}}

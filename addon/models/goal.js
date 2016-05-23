@@ -8,6 +8,10 @@ const { computed } = Ember;
 export default Activity.extend({
   engine: attr('string', { defaultValue: 'goals' }),
 
+  created_at: attr('moment'),
+
+  updated_at: attr('moment'),
+
   /**
  * The title of the doc
  *
@@ -23,7 +27,7 @@ export default Activity.extend({
   * @public
   */
   description: attr('string'),
-  progress: attr('string'),
+  progress: attr('string', {defaultValue: 'init' }),
   updateText: attr('string'),
 
   contributors: hasMany('user'),
