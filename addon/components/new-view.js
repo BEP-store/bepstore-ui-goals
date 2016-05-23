@@ -9,7 +9,6 @@ export default ActivitiesBaseNewView.extend({
   account: service(),
   groups: null,
   parents: null,
-  contributors: null,
 
   init(){
    this._super(...arguments);

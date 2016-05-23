@@ -23,7 +23,7 @@ export default Activity.extend({
   * @public
   */
   description: attr('string'),
-  progress: attr('string'),
+  progress: attr('string', {defaultValue: 'init' }),
   updateText: attr('string'),
 
   contributors: hasMany('user'),
