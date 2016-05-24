@@ -5,13 +5,18 @@
       {{component 'bepstore-goals@badge/status-badge' status=model.status size="small"}}
     </div>
     <div class="goal_volunteers goal_right">
-      Volunteers: 42
+      Volunteers: {{model.contributors.length}}
     </div>
   </div>
   {{#if showAll}}
   <div class="goal_con_lower">
     <div class="goal_descr goal_left">
       <p>{{model.description}}</p>
+      {{#link-to activitiesShowRoute model.id}}
+        {{#fbf-btn}}
+          Go to Goal!
+        {{/fbf-btn}}
+      {{/link-to}}
     </div>
     <div class="goal_coret goal_right">
       {{component 'bepstore-goals@goal/core-team' team=model}}

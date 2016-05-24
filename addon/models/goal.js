@@ -37,7 +37,4 @@ export default Activity.extend({
   head_frontend: belongsTo('user', { inverse: null }),
   head_backend: belongsTo('user', { inverse: null }),
 
-  contributorsCount: computed('contributors', function() {
-  return this.get('contributors').length;
-  })
 });
