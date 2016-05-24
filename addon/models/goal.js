@@ -1,9 +1,6 @@
 import Activity from 'feedbackfruits-activities/models/activity';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 import attr from 'ember-data/attr';
-import Ember from 'ember';
-
-const { computed } = Ember;
 
 export default Activity.extend({
   engine: attr('string', { defaultValue: 'goals' }),
@@ -28,7 +25,7 @@ export default Activity.extend({
   */
   description: attr('string'),
   status: attr('string', {defaultValue: 'init' }),
-  updateText: attr('string'),
+  updateText: attr('string', {defaultValue: 'This goal is in its starting-phase at the moment. If you want to contribute to this project when there are requirements, add yourself as contributor with the button on the bottom-right. If you want to lead this project as part of the Big Four, click on an open spot and confirm you want that role!' }),
 
   contributors: hasMany('user'),
 

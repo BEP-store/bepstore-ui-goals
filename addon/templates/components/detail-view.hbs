@@ -1,16 +1,16 @@
 <div class="fbf-layout__flex-container">
-  {{#goal/goal-index model=model}}
+  {{#component 'bepstore-goals@goal/goal-index' model=model}}
     <h2>Description:</h2>
     {{#fbf-card}}
-      {{model.description}}
+      {{#fbf-item}}
+        {{model.description}}
+      {{/fbf-item}}
     {{/fbf-card}}
       <h3>Status: {{component 'bepstore-goals@badge/status-badge' status=model.status size="big"}}</h3>
     {{#fbf-card}}
-      {{model.statusNow}}
+      {{#fbf-item}}
+        {{model.updateText}}
+      {{/fbf-item}}
     {{/fbf-card}}
-      <h3>What is next?</h3>
-    {{#fbf-card}}
-      {{model.statusToBe}}
-    {{/fbf-card}}
-  {{/goal/goal-index}}
+  {{/component}}
 </div>
