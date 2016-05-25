@@ -1,0 +1,36 @@
+{{fbf-btn position="fixed-bottomright" isFloating=true isColored=true icon="add" on-click="clickButton"}}
+{{#if _isBottomSheetShown}}
+  {{#fbf-bottom-sheet}}
+    {{#if _githubURLUI}}
+      <a href={{_githubURLUI}}>
+        {{#fbf-bottom-sheet-item icon='folder_shared'}}
+          Github - UI
+        {{/fbf-bottom-sheet-item}}
+      </a>
+    {{else}}
+    <a href="#">
+        {{#fbf-bottom-sheet-item icon='error'}}
+          No github-folder linked for UI
+        {{/fbf-bottom-sheet-item}}
+      </a>
+    {{/if}}
+    {{#if _githubURLAPI}}
+      <a href={{_githubURLAPI}}>
+        {{#fbf-bottom-sheet-item icon='folder_shared'}}
+          Github - API
+        {{/fbf-bottom-sheet-item}}
+      </a>
+    {{else}}
+    <a href="#">
+        {{#fbf-bottom-sheet-item icon='error'}}
+          No github-folder linked for API
+        {{/fbf-bottom-sheet-item}}
+      </a>
+    {{/if}}
+    <div {{action "addContributor"}}>
+    {{#fbf-bottom-sheet-item icon='face'}}
+      Refruit yourself!
+    {{/fbf-bottom-sheet-item}}
+  </div>
+  {{/fbf-bottom-sheet}}
+{{/if}}
