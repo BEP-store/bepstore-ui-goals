@@ -22,6 +22,9 @@ export default Component.extend(ClickOutside, {
     clickButton() {
       // this.get('router').transitionTo(this.get('activitiesNewRoute'));
       this.toggleProperty('_isBottomSheetShown');
+    },
+    addContributor(role) { // jshint ignore: line
+      alert("you have been refruited!!!");
     }
   },
 
