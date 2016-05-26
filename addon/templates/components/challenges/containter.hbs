@@ -1,0 +1,10 @@
+<div class="timeline_containter">
+    {{#each model as |milestone|}}
+    {{/each}}
+
+    {{component 'bepstore-goals@challenges/milestone' title="V0.1" showIssues=true openMilestone=openMilestone showMilestone=(action 'showMilestone')}}
+    {{component 'bepstore-goals@challenges/milestone' title="V0.2" openMilestone=openMilestone showMilestone=(action 'showMilestone')}}
+    {{component 'bepstore-goals@challenges/milestone' title="V0.3" openMilestone=openMilestone showMilestone=(action 'showMilestone')}}
+    {{component 'bepstore-goals@challenges/milestone' title="V0.4" openMilestone=openMilestone showMilestone=(action 'showMilestone')}}
+    {{component 'bepstore-goals@challenges/milestone' title="V1.0" last=true openMilestone=openMilestone showMilestone=(action 'showMilestone')}}
+</div>
