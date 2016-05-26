@@ -1,4 +1,4 @@
-import layout from 'bepstore-goals/templates/components/challenges/containter';
+import layout from 'bepstore-goals/templates/components/challenges/container';
 import Ember from 'ember';
 
 export default Ember.Component.extend({
