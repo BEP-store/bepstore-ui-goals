@@ -12,11 +12,11 @@
   <div class="goal_con_lower">
     <div class="goal_descr goal_left">
       <p>{{model.description}}</p>
-      {{#link-to activitiesShowRoute model.id}}
+      <div {{action "open"}}>
         {{#fbf-btn}}
           Go to Goal!
         {{/fbf-btn}}
-      {{/link-to}}
+      </div>
     </div>
     <div class="goal_coret goal_right">
       {{component 'bepstore-goals@goal/core-team' team=model}}
