@@ -1,0 +1,10 @@
+<div {{action 'showAll'}}>{{title}}</div>
+{{#if show}}
+  <div class="subchallenge_container">
+
+  </div>
+{{else}}
+  {{#unless last}}
+    <i class="material-icons centered">more_vert</i>
+  {{/unless}}
+{{/if}}

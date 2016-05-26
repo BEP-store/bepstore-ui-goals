@@ -12,5 +12,17 @@
         {{model.updateText}}
       {{/fbf-item}}
     {{/fbf-card}}
+    <h3>Design</h3>
+    {{#fbf-card}}
+      {{#fbf-item class="design_item"}}
+        Feel free to imagine a drag and drop field here
+      {{/fbf-item}}
+    {{/fbf-card}}
+    <h3>Challenges</h3>
+    {{#fbf-card}}
+      {{#fbf-item class="challenges_item" }}
+        {{component 'bepstore-goals@challenges/container' model=model.children}}
+      {{/fbf-item}}
+    {{/fbf-card}}
   {{/component}}
 </div>
