@@ -1,6 +1,27 @@
 {{fbf-btn position="fixed-bottomright" isFloating=true isColored=true icon="add" on-click="clickButton"}}
 {{#if _isBottomSheetShown}}
   {{#fbf-bottom-sheet}}
+    {{#unless model.head_design}}
+      <div {{action "addContributor" "design"}}>
+        {{#fbf-bottom-sheet-item icon='create'}}
+          Join the Big Four<br /> as Head Design!
+        {{/fbf-bottom-sheet-item}}
+      </div>
+    {{/unless}}
+    {{#unless model.head_frontend}}
+      <div {{action "addContributor" "frontend"}}>
+        {{#fbf-bottom-sheet-item icon='http'}}
+          Join the Big Four<br /> as Head UI!
+        {{/fbf-bottom-sheet-item}}
+      </div>
+    {{/unless}}
+    {{#unless model.head_backend}}
+      <div {{action "addContributor" "backend"}}>
+        {{#fbf-bottom-sheet-item icon='build'}}
+          Join the Big Four<br /> as Head API!
+        {{/fbf-bottom-sheet-item}}
+      </div>
+    {{/unless}}
     {{#if _githubURLUI}}
       <a href={{_githubURLUI}}>
         {{#fbf-bottom-sheet-item icon='folder_shared'}}
@@ -8,7 +29,7 @@
         {{/fbf-bottom-sheet-item}}
       </a>
     {{else}}
-    <a href="#">
+      <a href="#">
         {{#fbf-bottom-sheet-item icon='error'}}
           No github-folder linked for UI
         {{/fbf-bottom-sheet-item}}
@@ -21,16 +42,16 @@
         {{/fbf-bottom-sheet-item}}
       </a>
     {{else}}
-    <a href="#">
+      <a href="#">
         {{#fbf-bottom-sheet-item icon='error'}}
           No github-folder linked for API
         {{/fbf-bottom-sheet-item}}
       </a>
     {{/if}}
     <div {{action "addContributor"}}>
-    {{#fbf-bottom-sheet-item icon='face'}}
+    {{#fbf-bottom-sheet-item icon='person_add'}}
       Refruit yourself!
     {{/fbf-bottom-sheet-item}}
-  </div>
+    </div>
   {{/fbf-bottom-sheet}}
 {{/if}}

@@ -3,35 +3,40 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   layout,
-  _getPO: Ember.computed('team', function() {
-    let po = this.get('team').po;
-    if(po){
-      return po;
-    }
-      return "?";
-    }),
+  poFlag: false,
+  hdFlag: false,
+  hfeFlag: false,
+  hbeFlag: false,
+  _po: "?",
+  _hd: "?",
+  _hfe: "?",
+  _hbe: "?",
 
-  _getHD: Ember.computed('team', function() {
-    let hd = this.get('team').hd;
-    if(hd){
-      return hd;
-    }
-      return "?";
-    }),
-
-  _getHFE: Ember.computed('team', function() {
-    let hfe = this.get('team').hfe;
-    if(hfe){
-      return hfe;
-    }
-      return "?";
-    }),
-
-  _getHBE: Ember.computed('team', function() {
-    let hbe = this.get('team').hbe;
-    if(hbe){
-      return hbe;
-    }
-      return "?";
-    })
+  init() {
+   this._super(...arguments);
+    this.get('team.product_owner').then((po) => {
+        if(po){
+          this.set('_po', po.get('name'));
+          this.toggleProperty('poFlag');
+        }
+      });
+    this.get('team.head_design').then((hd) => {
+        if(hd){
+          this.set('_hd', hd.get('name'));
+          this.toggleProperty('hdFlag');
+        }
+      });
+    this.get('team.head_frontend').then((hfe) => {
+        if(hfe){
+          this.set('_hfe', hfe.get('name'));
+          this.toggleProperty('hfeFlag');
+        }
+      });
+    this.get('team.head_backend').then((hbe) => {
+        if(hbe){
+          this.set('_hbe', hbe.get('name'));
+          this.toggleProperty('hbeFlag');
+        }
+      });
+  }
 });

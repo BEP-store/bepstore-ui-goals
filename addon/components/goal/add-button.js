@@ -15,16 +15,25 @@ export default Component.extend(ClickOutside, {
   router: service(),
 
   activitiesNewRoute: computed('session.baseRoute', function() {
-    return `activities.new`;
+    return `goal.new`;
   }),
 
   actions: {
     clickButton() {
-      // this.get('router').transitionTo(this.get('activitiesNewRoute'));
       this.toggleProperty('_isBottomSheetShown');
     },
-    addContributor(role) { // jshint ignore: line
-      alert("you have been refruited!!!");
+    addContributor(role) {
+      //this.get('model').get('contributors').pushObject(this.get('session.user'));
+      this.get('session.user.goals').pushObject(this.get('model'));
+      if(role){
+        let r = `head_${role}`;
+        this.get('model').set(r , this.get('session.user'));
+      }
+      this.get('model').save().then(() => {
+        this.get('session.user').save().then(() => {
+          alert("you have been refruited!!! ");
+        });
+      });
     }
   },
 
