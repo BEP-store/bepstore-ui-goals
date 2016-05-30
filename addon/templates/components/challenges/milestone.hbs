@@ -1,13 +1,19 @@
 <div {{action 'showAll'}}>{{model.title}}</div>
 {{#if show}}
   <div class="{{if finished "done "}}subchallenge_container mdl-shadow--2dp">
+    {{#if needScroll}}
     <div class="overflow-container">
       <div class="scroll-container">
+        {{#each prioIssues as |issue|}}
+          {{component 'bepstore-goals@challenges/issue' model=issue class="issue"}}
+        {{/each}}
+      </div>
+    </div>
+    {{else}}
       {{#each prioIssues as |issue|}}
         {{component 'bepstore-goals@challenges/issue' model=issue class="issue"}}
       {{/each}}
-    </div>
-  </div>
+    {{/if}}
     <div class="progress_container">
       <div class="label">
         Progress: {{progress}}%

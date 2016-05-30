@@ -5,6 +5,11 @@ export default Ember.Component.extend({
   layout,
   show: false,
   openMilestone: null,
+  needScroll: false,
+
+  _Scroll: Ember.on('init', function() {
+    this.set('needScroll', this.get('model.issues').length > 3);
+  }),
 
   prioIssues: Ember.computed('model', function (){
     return this.get('model.issues').sortBy('state','prio').toArray().reverse();
