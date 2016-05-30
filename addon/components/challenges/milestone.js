@@ -6,8 +6,18 @@ export default Ember.Component.extend({
   show: false,
   openMilestone: null,
 
+  prioIssues: Ember.computed('model', function (){
+    return this.get('model.issues').sortBy('state','prio').toArray().reverse();
+  }),
+
+  _progress: Ember.on('init', function(){
+    let issues = this.get('model.issues');
+    this.set('progress', Math.round(issues.filterBy('state','closed').length / issues.length * 1000)/10);
+    this.set('finished', this.get('model.state') === "closed");
+  }),
+
   hideIssue: function() {
-    if(this.get('show') && (this.get('openMilestone') !== this.get('title')))
+    if(this.get('show') && (this.get('openMilestone') !== this.get('model.title')))
     {
       this.set('show', false);
     }
@@ -15,7 +25,7 @@ export default Ember.Component.extend({
 
   actions: {
     showAll() {
-      this.get('showMilestone')(this.get('title'));
+      this.get('showMilestone')(this.get('model.title'));
       this.set('show', true);
     }
   }
