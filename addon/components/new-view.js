@@ -32,7 +32,8 @@ export default ActivitiesBaseNewView.extend({
 
       let model = this.get('store').createRecord('goal', {
          ...attrs,
-         product_owner: this.get('session.user')
+         product_owner: this.get('session.user'),
+         contributors: [this.get('session.user')]
       });
 
       this.get('model').deleteRecord();
