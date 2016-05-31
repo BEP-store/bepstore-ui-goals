@@ -1,6 +1,7 @@
 $width: 5%
-$bigwidth: 100% * (100% / $width)
-$margin: -0.5*($bigwidth - 100)
+$bigwidth: 95% * (100% / $width)
+$margin: -0.52*($bigwidth - 100)
+$issueheight: 200px
 
 .challenges_item
  width: 100%
@@ -12,10 +13,47 @@ $margin: -0.5*($bigwidth - 100)
   margin-right: auto
 
 .subchallenge_container
-  border: 3px solid black
+  display: inline-block
+  border: 1px solid grey
   width: $bigwidth
+  height: $issueheight + 50px
   margin-left: $margin
-  height: 50px
+  margin-bottom: 10px
+  padding: 15px
+
+.overflow-container
+ overflow-x: auto
+ height: $issueheight + 20px
+ width: 100%
+
+.scroll-container
+ display: inline-flex
+
+.progress_container
+  padding-top: 10px
+  height: 30px
+  display: inline-block
+  width: 100%
 
 .centered
  margin-left: 10px
+
+.issue
+  font-size: 16px
+  display: inline-block
+  border: 1px solid black
+  height: $issueheight*0.8
+  width: $issueheight*0.65
+  margin-right: 20px
+  padding: $issueheight*0.1
+
+.label
+  width: 21%
+  float: left
+
+.progress
+  width: 77%
+  float: left
+
+.done
+  background-color: green

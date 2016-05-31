@@ -35,10 +35,6 @@ export default ActivitiesBaseNewView.extend({
          product_owner: this.get('session.user')
       });
 
-      model.get('product_owner').then((user) => {
-        alert(user.get('name'));
-      });
-
       this.get('model').deleteRecord();
       this.set('model', model);
       save();
