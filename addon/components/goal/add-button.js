@@ -23,7 +23,6 @@ export default Component.extend(ClickOutside, {
       this.toggleProperty('_isBottomSheetShown');
     },
     addContributor(role) {
-      console.log(role);
       this.get('model').get('contributors').pushObject(this.get('session.user'));
       if(role){
         let r = `head_${role}`;
