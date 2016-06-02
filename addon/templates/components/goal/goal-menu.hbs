@@ -1,0 +1,41 @@
+{{#fbf-btn on-click="clickButton"}}
+  <div class="fbf-item--center-content">
+    {{#if _isExpanded}}
+    <i class="material-icons">expand_less</i>
+    {{else}}
+    <i class="material-icons">expand_more</i>
+    {{/if}}
+  </div>
+{{/fbf-btn}}
+{{#if _isExpanded}}
+  <div class="fbf-notifications__window">
+    <h5> Options </h5>
+    {{#fbf-item borderTop=true }}
+      <div class="fbf-item__content" {{action "showContributors"}}>
+        {{#fbf-text light=true}}Refruit yourself as...{{/fbf-text}}
+        {{#if _showContributors}}
+          {{#fbf-item borderTop=true class="menu_item"}}
+            <div class="fbf-item__content" {{action 'addContributor'}} >
+              {{#fbf-text light=true}}contributor{{/fbf-text}}
+            </div>
+          {{/fbf-item}}
+          {{#fbf-item borderTop=true class="menu_item"}}
+            <div class="fbf-item__content" {{action 'addContributor' 'design'}} >
+              {{#fbf-text light=true}}Head Design{{/fbf-text}}
+            </div>
+          {{/fbf-item}}
+          {{#fbf-item borderTop=true class="menu_item"}}
+            <div class="fbf-item__content" {{action 'addContributor' 'frontend'}} >
+              {{#fbf-text light=true}}Head Front-End{{/fbf-text}}
+            </div>
+          {{/fbf-item}}
+          {{#fbf-item borderTop=true class="menu_item"}}
+            <div class="fbf-item__content" {{action 'addContributor' 'backend'}} >
+              {{#fbf-text light=true}}Head Back-End{{/fbf-text}}
+            </div>
+          {{/fbf-item}}
+        {{/if}}
+      </div>
+    {{/fbf-item}}
+  </div>
+{{/if}}
