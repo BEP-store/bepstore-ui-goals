@@ -1,57 +1,36 @@
 {{fbf-btn position="fixed-bottomright" isFloating=true isColored=true icon="add" on-click="clickButton"}}
 {{#if _isBottomSheetShown}}
   {{#fbf-bottom-sheet}}
-    {{#unless model.head_design}}
-      <div {{action "addContributor" "design"}}>
-        {{#fbf-bottom-sheet-item icon='create'}}
-          Join the Big Four<br /> as Head Design!
-        {{/fbf-bottom-sheet-item}}
-      </div>
-    {{/unless}}
-    {{#unless model.head_frontend}}
-      <div {{action "addContributor" "frontend"}}>
-        {{#fbf-bottom-sheet-item icon='http'}}
-          Join the Big Four<br /> as Head UI!
-        {{/fbf-bottom-sheet-item}}
-      </div>
-    {{/unless}}
-    {{#unless model.head_backend}}
-      <div {{action "addContributor" "backend"}}>
-        {{#fbf-bottom-sheet-item icon='build'}}
-          Join the Big Four<br /> as Head API!
-        {{/fbf-bottom-sheet-item}}
-      </div>
-    {{/unless}}
-    {{#if _githubURLUI}}
-      <a href={{_githubURLUI}}>
-        {{#fbf-bottom-sheet-item icon='folder_shared'}}
-          Github - UI
-        {{/fbf-bottom-sheet-item}}
-      </a>
-    {{else}}
-      <a href="#">
-        {{#fbf-bottom-sheet-item icon='error'}}
-          No github-folder linked for UI
-        {{/fbf-bottom-sheet-item}}
-      </a>
-    {{/if}}
-    {{#if _githubURLAPI}}
-      <a href={{_githubURLAPI}}>
-        {{#fbf-bottom-sheet-item icon='folder_shared'}}
-          Github - API
-        {{/fbf-bottom-sheet-item}}
-      </a>
-    {{else}}
-      <a href="#">
-        {{#fbf-bottom-sheet-item icon='error'}}
-          No github-folder linked for API
-        {{/fbf-bottom-sheet-item}}
-      </a>
-    {{/if}}
-    <div {{action "addContributor"}}>
-    {{#fbf-bottom-sheet-item icon='person_add'}}
-      Refruit yourself!
-    {{/fbf-bottom-sheet-item}}
+    <div style="height:130px; width:130px">
+      {{#fbf-bottom-sheet-item icon='feedback'}}
+        Give a update/
+        Release
+      {{/fbf-bottom-sheet-item}}
+    </div>
+    <div style="height:130px; width:130px">
+      {{#fbf-bottom-sheet-item icon='edit'}}
+        Edit Goal
+      {{/fbf-bottom-sheet-item}}
+    </div>
+    <div style="height:130px; width:130px">
+      {{#fbf-bottom-sheet-item icon='delete'}}
+        Put it in tha traaash
+      {{/fbf-bottom-sheet-item}}
+    </div>
+    <div style="height:130px; width:130px" {{action "addRepo"}}>
+      {{#fbf-bottom-sheet-item icon='create_new_folder'}}
+        Add a Github Repository
+      {{/fbf-bottom-sheet-item}}
+    </div>
+    <div style="height:130px; width:130px" {{action "addMilestone"}}>
+      {{#fbf-bottom-sheet-item icon='add_circle_outline'}}
+        Add a Milestone
+      {{/fbf-bottom-sheet-item}}
+    </div>
+    <div style="height:130px; width:130px" {{action "addIssue"}}>
+      {{#fbf-bottom-sheet-item icon='add'}}
+        Add a Issue
+      {{/fbf-bottom-sheet-item}}
     </div>
   {{/fbf-bottom-sheet}}
 {{/if}}

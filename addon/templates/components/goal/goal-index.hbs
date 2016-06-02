@@ -5,6 +5,9 @@
         {{yield}}
       </div>
     </div>
+    {{#if addType}}
+      {{component 'bepstore-goals@challenges/add' type=addType model=model close=(action 'closeAdd')}}
+    {{/if}}
   {{/if}}
 {{/fbf-nav}}
-{{component 'bepstore-goals@goal/add-button' model=model}}
+{{component 'bepstore-goals@goal/add-button' model=model add=(action 'openAdd')}}
