@@ -14,24 +14,30 @@
       <div class="fbf-item__content" {{action "showContributors"}}>
         {{#fbf-text light=true}}Refruit yourself as...{{/fbf-text}}
         {{#if _showContributors}}
-          {{#fbf-item borderTop=true class="menu_item"}}
-            <div class="fbf-item__content" {{action 'addContributor'}} >
-              {{#fbf-text light=true}}contributor{{/fbf-text}}
+          {{component 'bepstore-goals@goal/goal-menu/join' model=model}}
+        {{/if}}
+      </div>
+    {{/fbf-item}}
+    {{#fbf-item borderTop=true }}
+      <div class="fbf-item__content">
+      <div {{action "showGoTo"}}>
+        {{#fbf-text light=true}}Show...{{/fbf-text}}
+      </div>
+        {{#if _showGoTo}}
+          {{#fbf-item borderTop=true}}
+            <div class="fbf-item__content" {{action 'showRepo'}}>
+              {{#fbf-text light=true}}Github Repositories:{{/fbf-text}}
+              {{#if _showRepos}}
+                {{component 'bepstore-goals@goal/goal-menu/github' model=model}}
+              {{/if}}
             </div>
           {{/fbf-item}}
-          {{#fbf-item borderTop=true class="menu_item"}}
-            <div class="fbf-item__content" {{action 'addContributor' 'design'}} >
-              {{#fbf-text light=true}}Head Design{{/fbf-text}}
-            </div>
-          {{/fbf-item}}
-          {{#fbf-item borderTop=true class="menu_item"}}
-            <div class="fbf-item__content" {{action 'addContributor' 'frontend'}} >
-              {{#fbf-text light=true}}Head Front-End{{/fbf-text}}
-            </div>
-          {{/fbf-item}}
-          {{#fbf-item borderTop=true class="menu_item"}}
-            <div class="fbf-item__content" {{action 'addContributor' 'backend'}} >
-              {{#fbf-text light=true}}Head Back-End{{/fbf-text}}
+          {{#fbf-item borderTop=true}}
+            <div class="fbf-item__content" {{action 'showCore'}}>
+              {{#fbf-text light=true}}Core Team members:{{/fbf-text}}
+            {{#if _showCore}}
+              {{component 'bepstore-goals@goal/goal-menu/core' model=model}}
+            {{/if}}
             </div>
           {{/fbf-item}}
         {{/if}}

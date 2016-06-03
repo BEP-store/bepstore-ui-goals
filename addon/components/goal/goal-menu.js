@@ -3,12 +3,8 @@ import FbfNavItem from 'feedbackfruits-styles/components/fbf-nav-item';
 import Ember from 'ember';
 import ClickOutside from '../../mixins/click-outside';
 
-const { Component, computed, inject: { service } } = Ember;
+const { inject: { service } } = Ember;
 
-/**
- * Add button within a group page
- * @public
- */
 export default FbfNavItem.extend(ClickOutside, {
   layout,
   hasIcon: true,
@@ -20,23 +16,35 @@ export default FbfNavItem.extend(ClickOutside, {
     },
     showContributors(){
       this.toggleProperty('_showContributors');
+      this.set('_showGoTo', false);
     },
-    addContributor(role) {
-      this.get('model.contributors').pushObject(this.get('session.user'));
-      if(role){
-        let r = `head_${role}`;
-        this.get('model').set(r , this.get('session.user'));
-      }
-      this.get('model').save().then(() => {
-          alert("you have been refruited!!! ");
-      });
+    showGoTo(){
+      this.toggleProperty('_showGoTo');
+      this.set('_showContributors', false);
+      this.set('_showRepos', false);
+      this.set('_showCore', false);
+    },
+    showRepo(){
+      this.toggleProperty('_showRepos');
+      this.set('_showCore', false);
+    },
+    showCore(){
+      this.toggleProperty('_showCore');
+      this.set('_showRepos', false);
     }
   },
 
   _isExpanded: false,
   _showContributors: false,
+  _showGoTo: false,
+  _showRepos: false,
+  _showCore: false,
 
   clickOutside() {
     this.set('_isExpanded', false);
+    this.set('_showContributors', false);
+    this.set('_showGoTo', false);
+    this.set('_showRepos', false);
+    this.set('_showCore', false);
   }
 });

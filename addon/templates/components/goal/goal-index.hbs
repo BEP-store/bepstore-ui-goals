@@ -12,4 +12,6 @@
     {{component 'bepstore-goals@goal/goal-header' model=model}}
   {{/if}}
 {{/fbf-nav}}
-{{component 'bepstore-goals@goal/add-button' model=model add=(action 'openAdd')}}
+{{#if isCoreMember}}
+  {{component 'bepstore-goals@goal/add-button' model=model add=(action 'openAdd')}}
+{{/if}}

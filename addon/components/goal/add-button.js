@@ -2,8 +2,11 @@ import Ember from 'ember';
 import layout from 'bepstore-goals/templates/components/goal/add-button';
 import ClickOutside from '../../mixins/click-outside';
 
-export default Ember.Component.extend(ClickOutside, {
+const { Component, inject: { service }, computed: { equal } } = Ember;
+
+export default Component.extend(ClickOutside, {
   layout,
+  session: service(),
 
   actions: {
     clickButton() {
@@ -24,6 +27,7 @@ export default Ember.Component.extend(ClickOutside, {
   },
 
   _isBottomSheetShown: false,
+  _isPO: equal('model.product_owner', 'session.user.id'),
 
   clickOutside() {
     this.set('_isBottomSheetShown', false);
