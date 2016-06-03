@@ -1,9 +1,9 @@
-<div {{action 'showAll'}}>{{model.title}}</div>
+<div {{action 'toggle'}}>{{model.title}}</div>
 {{#if show}}
   <div class="{{if finished "done "}}subchallenge_container mdl-shadow--2dp">
     <div class="overflow-container">
       <div class="scroll-container">
-        {{#each prioIssues as |issue|}}
+        {{#each model.issues as |issue|}}
           {{component 'bepstore-goals@challenges/issue' model=issue class="issue"}}
         {{/each}}
       </div>
