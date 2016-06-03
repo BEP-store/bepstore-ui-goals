@@ -21,7 +21,11 @@
     <h3>Challenges</h3>
     {{#fbf-card}}
       {{#fbf-item class="challenges_item" }}
-        {{component 'bepstore-goals@challenges/container' model=model.children}}
+        <div class="timeline_container">
+            {{#each model.milestones as |milestone|}}
+              {{component 'bepstore-goals@challenges/milestone' model=milestone}}
+            {{/each}}
+        </div>
       {{/fbf-item}}
     {{/fbf-card}}
   {{/component}}

@@ -1,6 +1,9 @@
 import Activity from 'feedbackfruits-activities/models/activity';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 import attr from 'ember-data/attr';
+import Ember from 'ember';
+
+const { computed } = Ember;
 
 export default Activity.extend({
   engine: attr('string', { defaultValue: 'goals' }),
@@ -34,4 +37,17 @@ export default Activity.extend({
   head_frontend: belongsTo('user', { inverse: null }),
   head_backend: belongsTo('user', { inverse: null }),
 
+  repos: hasMany('repos'),
+
+  milestones: computed('repos.@each.milestones', function() {
+    return this.get('repos').toArray().reduce((memo, repo) => {
+      return [].concat(memo, repo.get('milestones').toArray());
+    }, []);
+  }),
+
+  issues: computed('repos.@each.issues', function() {
+    return this.get('repos').toArray().reduce((memo, repo) => {
+      return [].concat(memo, repo.get('issues').toArray());
+    }, []);
+  })
 });
