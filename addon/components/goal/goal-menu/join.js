@@ -1,7 +1,7 @@
 import layout from 'bepstore-goals/templates/components/goal/goal-menu/join';
 import Ember from 'ember';
 
-const { inject: { service }, computed: { notEmpty }} = Ember;
+const { inject: { service } } = Ember;
 
 export default Ember.Component.extend({
   layout,
