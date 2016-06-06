@@ -3,7 +3,7 @@
     {{#fbf-text light=true}}Product Owner: {{model.product_owner.name}}{{/fbf-text}}
   </div>
 {{/fbf-item}}
-{{#if hasHD}}
+{{#if model.head_design}}
   {{#fbf-item borderTop=true class="menu_item"}}
     <a href="/users/{{model.head_design.id}}" target="_blank">
       <div class="fbf-item__content">
@@ -12,7 +12,7 @@
     </a>
   {{/fbf-item}}
 {{/if}}
-{{#if hasHFE}}
+{{#if model.head_frontend}}
   {{#fbf-item borderTop=true class="menu_item"}}
     <a href="/users/{{model.head_frontend.id}}" target="_blank">
       <div class="fbf-item__content">
@@ -21,7 +21,7 @@
     </a>
   {{/fbf-item}}
 {{/if}}
-{{#if hasHBE}}
+{{#if model.head_backend}}
   {{#fbf-item borderTop=true class="menu_item"}}
     <a href="/users/{{model.head_backend.id}}" target="_blank">
       <div class="fbf-item__content">

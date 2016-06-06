@@ -10,9 +10,6 @@ export default Ember.Component.extend({
   isContributor: Ember.computed('model', function(){
     return this.get('model.contributors').isAny('id', this.get('session.user.id'));
   }),
-  hasHD: notEmpty('model.head_design.id'),
-  hasHFE: notEmpty('model.head_frontend.id'),
-  hasHBE: notEmpty('model.head_backend.id'),
 
   actions: {
     addContributor(role) {
