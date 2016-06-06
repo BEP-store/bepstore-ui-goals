@@ -8,14 +8,18 @@
       {{/fbf-bottom-sheet-item}}
     </div>
     <div style="height:130px; width:130px">
-      {{#fbf-bottom-sheet-item icon='edit'}}
-        Edit Goal
-      {{/fbf-bottom-sheet-item}}
+      {{#link-to editRoute}}
+        {{#fbf-bottom-sheet-item icon='edit'}}
+          Edit Goal
+        {{/fbf-bottom-sheet-item}}
+      {{/link-to}}
     </div>
     <div style="height:130px; width:130px">
-      {{#fbf-bottom-sheet-item icon='delete'}}
-        Put it in tha traaash
-      {{/fbf-bottom-sheet-item}}
+      {{#link-to destroyRoute}}
+        {{#fbf-bottom-sheet-item icon='delete'}}
+          Put it in tha traaash
+        {{/fbf-bottom-sheet-item}}
+      {{/link-to}}
     </div>
     <div style="height:130px; width:130px" {{action "addRepo"}}>
       {{#fbf-bottom-sheet-item icon='create_new_folder'}}
