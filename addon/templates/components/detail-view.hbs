@@ -22,8 +22,8 @@
     {{#fbf-card}}
       {{#fbf-item class="challenges_item" }}
         <div class="timeline_container">
-            {{#each model.milestones as |milestone|}}
-              {{component 'bepstore-goals@challenges/milestone' model=milestone}}
+            {{#each model.challenges as |milestone index|}}
+              {{component 'bepstore-goals@challenges/milestone' model=milestone index=index length=model.challenges.length}}
             {{/each}}
         </div>
       {{/fbf-item}}

@@ -1,0 +1,28 @@
+{{#unless isContributor}}
+{{#fbf-item borderTop=true class="menu_item"}}
+  <div class="fbf-item__content" {{action 'addContributor'}} >
+    {{#fbf-text light=true}}- Contributor{{/fbf-text}}
+  </div>
+{{/fbf-item}}
+{{/unless}}
+{{#unless model.head_design}}
+  {{#fbf-item borderTop=true class="menu_item"}}
+    <div class="fbf-item__content" {{action 'addContributor' 'design'}} >
+      {{#fbf-text light=true}}- Head Design{{/fbf-text}}
+    </div>
+  {{/fbf-item}}
+{{/unless}}
+{{#unless model.head_frontend}}
+  {{#fbf-item borderTop=true class="menu_item"}}
+    <div class="fbf-item__content" {{action 'addContributor' 'frontend'}} >
+      {{#fbf-text light=true}}- Head UI{{/fbf-text}}
+    </div>
+  {{/fbf-item}}
+{{/unless}}
+{{#unless model.head_backend}}
+  {{#fbf-item borderTop=true class="menu_item"}}
+    <div class="fbf-item__content" {{action 'addContributor' 'backend'}} >
+      {{#fbf-text light=true}}- Head API{{/fbf-text}}
+    </div>
+  {{/fbf-item}}
+{{/unless}}

@@ -1,0 +1,32 @@
+{{#fbf-item borderTop=true class="menu_item"}}
+  <div class="fbf-item__content" {{action 'toUser' model.product_owner.id}}>
+    {{#fbf-text light=true}}Product Owner: {{model.product_owner.name}}{{/fbf-text}}
+  </div>
+{{/fbf-item}}
+{{#if model.head_design}}
+  {{#fbf-item borderTop=true class="menu_item"}}
+    <a href="/users/{{model.head_design.id}}" target="_blank">
+      <div class="fbf-item__content">
+        {{#fbf-text light=true}}Head Design: {{model.head_design.name}}{{/fbf-text}}
+      </div>
+    </a>
+  {{/fbf-item}}
+{{/if}}
+{{#if model.head_frontend}}
+  {{#fbf-item borderTop=true class="menu_item"}}
+    <a href="/users/{{model.head_frontend.id}}" target="_blank">
+      <div class="fbf-item__content">
+        {{#fbf-text light=true}}Head UI: {{model.head_frontend.name}}{{/fbf-text}}
+      </div>
+    </a>
+  {{/fbf-item}}
+{{/if}}
+{{#if model.head_backend}}
+  {{#fbf-item borderTop=true class="menu_item"}}
+    <a href="/users/{{model.head_backend.id}}" target="_blank">
+      <div class="fbf-item__content">
+        {{#fbf-text light=true}}Head API: {{model.head_backend.name}}{{/fbf-text}}
+      </div>
+    </a>
+  {{/fbf-item}}
+{{/if}}

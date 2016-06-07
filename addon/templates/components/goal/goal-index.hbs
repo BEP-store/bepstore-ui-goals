@@ -5,6 +5,13 @@
         {{yield}}
       </div>
     </div>
+  {{else if section.isHeader}}
+    {{component 'bepstore-goals@goal/goal-header' model=model}}
+    {{#if addType}}
+      {{component 'bepstore-goals@challenges/add' type=addType model=model close=(action 'closeAdd')}}
+    {{/if}}
   {{/if}}
 {{/fbf-nav}}
-{{component 'bepstore-goals@goal/add-button' model=model}}
+{{#if isCoreMember}}
+  {{component 'bepstore-goals@goal/add-button' model=model add=(action 'openAdd')}}
+{{/if}}

@@ -1,0 +1,47 @@
+{{#fbf-btn on-click="clickButton"}}
+  <div class="fbf-item--center-content">
+    {{#if _isExpanded}}
+    <i class="material-icons">expand_less</i>
+    {{else}}
+    <i class="material-icons">expand_more</i>
+    {{/if}}
+  </div>
+{{/fbf-btn}}
+{{#if _isExpanded}}
+  <div class="fbf-notifications__window">
+    <h5> Options </h5>
+    {{#fbf-item borderTop=true }}
+      <div class="fbf-item__content" {{action "showContributors"}}>
+        {{#fbf-text light=true}}Refruit yourself as...{{/fbf-text}}
+        {{#if _showContributors}}
+          {{component 'bepstore-goals@goal/goal-menu/join' model=model}}
+        {{/if}}
+      </div>
+    {{/fbf-item}}
+    {{#fbf-item borderTop=true }}
+      <div class="fbf-item__content">
+      <div {{action "showGoTo"}}>
+        {{#fbf-text light=true}}Show...{{/fbf-text}}
+      </div>
+        {{#if _showGoTo}}
+          {{#fbf-item borderTop=true}}
+            <div class="fbf-item__content" {{action 'showRepo'}}>
+              {{#fbf-text light=true}}Github Repositories:{{/fbf-text}}
+              {{#if _showRepos}}
+                {{component 'bepstore-goals@goal/goal-menu/github' model=model}}
+              {{/if}}
+            </div>
+          {{/fbf-item}}
+          {{#fbf-item borderTop=true}}
+            <div class="fbf-item__content" {{action 'showCore'}}>
+              {{#fbf-text light=true}}Core Team members:{{/fbf-text}}
+            {{#if _showCore}}
+              {{component 'bepstore-goals@goal/goal-menu/core' model=model}}
+            {{/if}}
+            </div>
+          {{/fbf-item}}
+        {{/if}}
+      </div>
+    {{/fbf-item}}
+  </div>
+{{/if}}
