@@ -1,20 +1,18 @@
-<div>
-  Number: {{model.number}}
+<div class="title_bar">
+  {{getTitle}}
 </div>
-<div>
-  Title: {{model.title}}
+<div class="issue_info">
+  <div class="priority issue_badge">
+    Prio: high
+  </div>
+  <div class="type issue_badge">
+    Type: Feature
+  </div>
+  {{model.repo.id}}
 </div>
-<div>
-  State: {{model.state}}
+<div class="body_content">
+  {{model.body}}
 </div>
-<div>
-  Repo: {{model.repo.name}}
+<div class="status_bar {{model.state}}">
+ Status: {{model.state}}
 </div>
-
-{{#if isPending}}
-
-{{else if isFailure}}
-
-{{else if isSucces}}
-
-{{/if}}
