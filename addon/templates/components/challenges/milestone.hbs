@@ -1,6 +1,11 @@
 <div {{action 'toggle'}}>{{model.title}}</div>
 {{#if show}}
   <div class="{{if finished "done "}}subchallenge_container mdl-shadow--2dp">
+    {{#if model.description}}
+      <div class="challenge_description">
+        {{model.description}}
+      </div>
+    {{/if}}
     <div class="overflow-container">
       <div class="scroll-container">
         {{#each model.issues as |issue|}}

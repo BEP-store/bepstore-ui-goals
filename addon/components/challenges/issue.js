@@ -5,13 +5,23 @@ export default Ember.Component.extend({
   layout,
   getTitle: Ember.computed('model', function() {
     let title = this.get('model.title');
-    console.log(title.length)
     if(title.length > 50){
       return title.substr(0,42) + '...';
     }
     else
     {
       return title;
+    }
+  }),
+
+  idSize: Ember.computed('model', function() {
+    let id = this.get('model.repo.id');
+    if(id.length > 28){
+      return 'small '.htmlSafe();
+    }
+    else
+    {
+      return '';
     }
   })
 });
