@@ -51,5 +51,27 @@ export default Activity.extend({
     return this.get('repos').toArray().reduce((memo, repo) => {
       return [].concat(memo, repo.get('issues').toArray());
     }, []);
-  })
+  }),
+
+  challenges: computed('milestones.@each.issues', function() {
+     let milestones = this.get('milestones');
+     let challenges = milestones
+       .map(milestone => milestone.get('title'))                                 // Get all titles from milestones
+       .uniq()                                                                  // Get all unique titles
+       .map(title => {                                                           // Map title to milestones
+         return {
+           title,
+           milestones: milestones.filter(other => other.get('title') === title)
+         };
+       })
+       .map(challenge => {
+         let { milestones } = challenge;                                        // Get milestones with same title
+         challenge.issues = milestones                                          // Map all issues of all arrays to one array
+           .map(milestone => milestone.get('issues'))
+           .reduce((memo, issues) => memo.concat(issues), []);
+         return challenge;
+       });
+     return challenges;
+   })
+
 });

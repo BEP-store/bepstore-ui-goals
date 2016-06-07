@@ -1,5 +1,9 @@
-{{#fbf-item borderTop=true class="menu_item"}}
-  <div class="fbf-item__content">
-    {{#fbf-text light=true}}- To be implemented{{/fbf-text}}
-  </div>
-{{/fbf-item}}
+{{#each model.repos as |repository|}}
+  {{#fbf-item borderTop=true class="menu_item"}}
+  <a href="https://github.com/{{repository.id}}" target="_blank">
+    <div class="fbf-item__content">
+      {{#fbf-text light=true}}- {{repository.name}}{{/fbf-text}}
+    </div>
+  </a>
+  {{/fbf-item}}
+{{/each}}

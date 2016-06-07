@@ -27,10 +27,10 @@ export default Ember.Component.extend(ClickOutside, {
           let id = link[1];
           this.get('store').findRecord('repo', id).then(repo => {
             this.get('model.repos').addObject(repo);
-            this.set('model.resources', [{
+            this.get('model.resources').addObject({
               route: repo.get('id'),
               type: 'repo'
-            }]);
+            });
             this.get('model').save().then(() => {
               this.set('new.link', '');
             });
