@@ -1,6 +1,6 @@
 import layout from 'bepstore-goals/templates/components/challenges/add';
 import Ember from 'ember';
-import ClickOutside from '../../mixins/click-outside';
+import ClickOutside from 'bepstore-goals/mixins/click-outside';
 
 const { computed: { equal }, inject: { service } } = Ember;
 

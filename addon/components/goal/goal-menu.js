@@ -1,7 +1,7 @@
 import layout from 'bepstore-goals/templates/components/goal/goal-menu';
 import FbfNavItem from 'feedbackfruits-styles/components/fbf-nav-item';
 import Ember from 'ember';
-import ClickOutside from '../../mixins/click-outside';
+import ClickOutside from 'bepstore-goals/mixins/click-outside';
 
 const { inject: { service } } = Ember;
 

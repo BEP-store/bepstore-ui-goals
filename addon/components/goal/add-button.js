@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import layout from 'bepstore-goals/templates/components/goal/add-button';
-import ClickOutside from '../../mixins/click-outside';
+import ClickOutside from 'bepstore-goals/mixins/click-outside';
 
 const { Component, inject: { service }, computed: { equal }, computed, getOwner } = Ember;
 
