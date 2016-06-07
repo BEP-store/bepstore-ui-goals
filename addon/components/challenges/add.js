@@ -22,7 +22,7 @@ export default Ember.Component.extend(ClickOutside, {
       if(this.get('isRepo')){
         let regex = /https:\/\/github.com\/(\w+?\/[\w|-]+)\/?.*/;
         let link = this.get('new.link').match(regex);
-        
+
         if(link){
           let id = link[1];
           this.get('store').findRecord('repo', id).then(repo => {

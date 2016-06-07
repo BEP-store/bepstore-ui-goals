@@ -19,6 +19,10 @@ export default Ember.Component.extend({
     return this.get('model.state') === 'closed';
   }),
 
+  isLast: computed('length', 'index', function() {
+    return this.get('length') === (this.get('index')+1);
+  }),
+
   actions: {
     toggle() {
       this.toggleProperty('show');

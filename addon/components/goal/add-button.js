@@ -8,12 +8,12 @@ export default Component.extend(ClickOutside, {
   layout,
   session: service(),
 
-  destroyRoute: Ember.computed('model', function(){
+  destroyRoute: computed('model', function(){
     let path = getOwner(this).lookup('controller:application').currentPath;
     return path.replace("show.index", "show.destroy");
   }),
 
-  editRoute: Ember.computed('model', function(){
+  editRoute: computed('model', function(){
     let path = getOwner(this).lookup('controller:application').currentPath;
     return path.replace("show.index", "show.edit");
   }),
