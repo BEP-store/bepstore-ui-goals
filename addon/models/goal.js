@@ -66,6 +66,20 @@ export default Activity.extend({
        })
        .map(challenge => {
          let { milestones } = challenge;                                        // Get milestones with same title
+
+         let issueData = milestones
+          .map(milestone => { return [milestone.get('openIssues'), milestone.get('closedIssues'), milestone.get('state') === "open"];})
+          .reduce((memo, data) => {
+            memo[0] += data[0];
+            memo[1] += data[1];
+            memo[2] = memo[2] || data[2];
+            return memo;
+          }, [0, 0, false]);
+         challenge.openIssues = issueData[0];
+         challenge.closedIssues = issueData[1];
+         challenge.state = issueData[2] ? "open" : "closed";
+
+
          challenge.issues = milestones                                          // Map all issues of all arrays to one array
            .map(milestone => milestone.get('issues'))
            .reduce((memo, issues) => memo.concat(issues), []);
