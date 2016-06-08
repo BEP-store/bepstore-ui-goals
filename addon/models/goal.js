@@ -3,6 +3,8 @@ import { belongsTo, hasMany } from 'ember-data/relationships';
 import attr from 'ember-data/attr';
 import Ember from 'ember';
 
+import semver from 'bepstore-goals/utils/semver';
+
 const { computed } = Ember;
 
 export default Activity.extend({
@@ -56,35 +58,46 @@ export default Activity.extend({
   challenges: computed('milestones.@each.issues', function() {
      let milestones = this.get('milestones');
      let challenges = milestones
-       .map(milestone => milestone.get('title'))                                 // Get all titles from milestones
-       .uniq()                                                                  // Get all unique titles
-       .map(title => {                                                           // Map title to milestones
+        // Get all titles from milestones
+       .map(milestone => milestone.get('title'))
+       // Filter non-SEMVER titles
+       .filter(title => {
+         let version = semver.parse(title);
+         return version != null;
+       })
+       // Get all unique titles
+       .uniq()
+       // Sort by SEMVER
+       .sort((a, b) => {
+         let versionA = semver.parse(a);
+         let versionB = semver.parse(b);
+
+         return semver.compare(versionA, versionB);
+       })
+       // Map title to milestones
+       .map(title => {
          return {
            title,
            milestones: milestones.filter(other => other.get('title') === title)
          };
        })
-       .map(challenge => {
-         let { milestones } = challenge;                                        // Get milestones with same title
-
-         let issueData = milestones
-          .map(milestone => { return [milestone.get('openIssues'), milestone.get('closedIssues'), milestone.get('state') === "open"];})
-          .reduce((memo, data) => {
-            memo[0] += data[0];
-            memo[1] += data[1];
-            memo[2] = memo[2] || data[2];
-            return memo;
-          }, [0, 0, false]);
-         challenge.openIssues = issueData[0];
-         challenge.closedIssues = issueData[1];
-         challenge.state = issueData[2] ? "open" : "closed";
-
-
-         challenge.issues = milestones                                          // Map all issues of all arrays to one array
+       .map(({ title, milestones }) => {
+         // Concatenate the issues of every milestone with the same name
+         let issues = milestones
            .map(milestone => milestone.get('issues'))
            .reduce((memo, issues) => memo.concat(issues), []);
-         return challenge;
+
+        // Summarize the statistics
+         let statistics = milestones.reduce((memo, milestone) => {
+            memo.openIssues += milestone.get('openIssues');
+            memo.closedIssues += milestone.get('closedIssues');
+            memo.state = (memo.state === 'open' || milestone.get('state') === 'open') ? 'open' : 'closed';
+            return memo;
+          }, { openIssues: 0, closedIssues: 0, state: 'closed' });
+
+        return Object.assign({}, { title, issues }, statistics);
        });
+
      return challenges;
    })
 
