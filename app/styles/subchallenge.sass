@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700)
+
 $issueheight: 250px
 
 .issue
@@ -14,24 +16,29 @@ $issueheight: 250px
   box-shadow: 10px 15px 15px -2px rgba(0,0,0,0.75)
 
 .title_bar
+  color: white
   overflow: hidden
   background-color: green
   border-bottom: 1px solid black
   width: 97%
-  height: $issueheight*0.2
+  height: $issueheight*0.17
   font-weight: bold
-  padding-top: 10px
+  padding-top: 7px
   padding-left: 10px
+  display: block /* Fallback for non-webkit */
+  display: -webkit-box
+  -webkit-line-clamp: 2
+  -webkit-box-orient: vertical
+  overflow: hidden
+  text-overflow: ellipsis
 
 .issue_info
+  font-size: 12px
   text-align: center
   margin: 5px
   height: $issueheight*0.19
   padding-bottom: 2px
   border-bottom: 1px dashed black
-
-.small
-  font-size: 12px
 
 .priority
   background-color: red
@@ -52,7 +59,7 @@ $issueheight: 250px
   margin-bottom: 5px
 
 .body_content
- height: $issueheight*0.40
+ height: $issueheight*0.43
  margin-left: 5px
  margin-right: 5px
  font-size: 12px
