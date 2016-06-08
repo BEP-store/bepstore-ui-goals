@@ -37,7 +37,7 @@ export default Component.extend(ClickOutside, {
   },
 
   _isBottomSheetShown: false,
-  _isPO: equal('model.product_owner', 'session.user.id'),
+  _isPO: equal('model.product_owner.id', 'session.user.id'),
 
   clickOutside() {
     this.set('_isBottomSheetShown', false);

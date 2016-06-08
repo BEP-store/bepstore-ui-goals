@@ -1,0 +1,80 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700)
+
+$issueheight: 250px
+
+.issue
+  border-radius: 5%
+  overflow: hidden
+  font-size: 16px
+  display: inline-block
+  border: 2px solid black
+  height: $issueheight
+  width: $issueheight*0.85
+  margin-right: 20px
+  -webkit-box-shadow: 10px 15px 15px -2px rgba(0,0,0,0.75)
+  -moz-box-shadow: 10px 15px 15px -2px rgba(0,0,0,0.75)
+  box-shadow: 10px 15px 15px -2px rgba(0,0,0,0.75)
+
+.title_bar
+  color: white
+  overflow: hidden
+  background-color: green
+  border-bottom: 1px solid black
+  width: 97%
+  height: $issueheight*0.17
+  font-weight: bold
+  padding-top: 7px
+  padding-left: 10px
+  display: block /* Fallback for non-webkit */
+  display: -webkit-box
+  -webkit-line-clamp: 2
+  -webkit-box-orient: vertical
+  overflow: hidden
+  text-overflow: ellipsis
+
+.issue_info
+  font-size: 12px
+  text-align: center
+  margin: 5px
+  height: $issueheight*0.19
+  padding-bottom: 2px
+  border-bottom: 1px dashed black
+
+.priority
+  background-color: red
+  float: left
+
+.type
+  background-color: yellow
+  float: right
+
+.issue_badge
+  border: 1px solid black
+  height: 16px
+  font-size: 13px
+  font-weight: bold
+  padding: 2px
+  padding-bottom: 3px
+  width: $issueheight*0.35
+  margin-bottom: 5px
+
+.body_content
+ height: $issueheight*0.43
+ margin-left: 5px
+ margin-right: 5px
+ font-size: 12px
+
+.status_bar
+  height: $issueheight*0.10
+  text-align: center
+  border-top: 1px solid black
+  width: 97%
+  font-weight: bold
+  padding-top: 5px
+  padding-left: 10px
+
+.closed
+  background-color: #33cc00
+
+.open
+  background-color: #ff6666

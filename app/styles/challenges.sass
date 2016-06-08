@@ -1,7 +1,8 @@
+@import "subchallenge"
+
 $width: 5%
 $bigwidth: 95% * (100% / $width)
 $margin: -0.52*($bigwidth - 100)
-$issueheight: 200px
 
 .challenges_item
  width: 100%
@@ -12,11 +13,18 @@ $issueheight: 200px
   margin-left: auto
   margin-right: auto
 
+.challenge_description
+  width: 90%
+  margin-left: 5%
+  margin-right: 5%
+  margin-bottom: 10px
+  border-bottom: 1px solid black
+
+
 .subchallenge_container
   display: inline-block
   border: 1px solid grey
   width: $bigwidth
-  height: $issueheight + 50px
   margin-left: $margin
   margin-bottom: 10px
   padding: 15px
@@ -24,7 +32,7 @@ $issueheight: 200px
 .overflow-container
  overflow-x: auto
  overflow-y: hidden
- height: $issueheight + 20px
+ height: $issueheight + 30px
  width: 100%
 
 .scroll-container
@@ -38,15 +46,6 @@ $issueheight: 200px
 
 .centered
  margin-left: 10px
-
-.issue
-  font-size: 16px
-  display: inline-block
-  border: 1px solid black
-  height: $issueheight*0.8
-  width: $issueheight*0.65
-  margin-right: 20px
-  padding: $issueheight*0.1
 
 .label
   width: 21%
