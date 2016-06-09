@@ -2,12 +2,12 @@
   {{model.title}}
 </div>
 <div class="issue_info">
-  <div class="priority issue_badge">
-    Prio: high
-  </div>
-  <div class="type issue_badge">
-    Type: Feature
-  </div>
+  {{#component 'bepstore-goals@badge/priority-badge' prio=model.priority}}
+    Prio: {{model.priority}}
+  {{/component}}
+  {{#component 'bepstore-goals@badge/type-badge' type=model.type}}
+    {{model.type}}
+  {{/component}}
   {{model.repo.id}}
 </div>
 <div class="body_content">

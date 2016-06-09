@@ -2,23 +2,29 @@
   labels.type => array
   $priority => label ~> "prio: $priority"
  */
+ function parse(issue, regex, setter, nolabel) {
+   let label = issue.get('labels').find((item) => item.get('name').match(regex));
 
-function parse(issue) {
-  let regex = /prio:(.*)?/;
-  let label = issue.get('labels').find((item) => item.get('name').match(regex));
+   if(!label){
+     issue.set(setter,nolabel);
+   }
+   else{
+     issue.set(setter,label.get('name').match(regex)[1]);
+   }
+ }
 
-  if(!label){
-    issue.set('priority','none');
+function setPrio(issue) {
+  if(!issue.get('priority')){
+    let regex = /prio:(.*)?/;
+    parse(issue, regex, 'priority', 'none');
   }
-  else{
-    issue.set('priority',label.get('name').match(regex)[1]);
-  }
-
 }
-
+function setType(issue) {
+  let regex = /type:(.*)?/;
+  parse(issue, regex, 'type', 'no type');
+}
 function compare(a, b) {
   /*jshint curly: false */
-
 
   let convertLabel = {
     high: 1,
@@ -42,9 +48,10 @@ function compare(a, b) {
   return 0;
 }
 
-export const issuePrio = {
-  parse,
+export const issueFun = {
+  setPrio,
+  setType,
   compare
 };
 
-export default issuePrio;
+export default issueFun;
