@@ -4,6 +4,7 @@ import attr from 'ember-data/attr';
 import Ember from 'ember';
 
 import semver from 'bepstore-goals/utils/semver';
+import issuePrio from 'bepstore-goals/utils/issuePrio';
 
 const { computed } = Ember;
 
@@ -85,7 +86,13 @@ export default Activity.extend({
          // Concatenate the issues of every milestone with the same name
          let issues = milestones
            .map(milestone => milestone.get('issues'))
-           .reduce((memo, issues) => memo.concat(issues), []);
+           .reduce((memo, issues) => memo.concat(issues), [])
+           .sort((a, b) => {
+             issuePrio.parse(a);
+             issuePrio.parse(b);
+
+             return issuePrio.compare(a, b);
+           });
 
         // Summarize the statistics
          let statistics = milestones.reduce((memo, milestone) => {
