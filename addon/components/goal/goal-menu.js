@@ -7,6 +7,7 @@ const { inject: { service } } = Ember;
 
 export default FbfNavItem.extend(ClickOutside, {
   layout,
+  classNames: 'right',
   hasIcon: true,
   session: service(),
 
