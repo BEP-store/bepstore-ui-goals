@@ -49,6 +49,7 @@
   "dependencies": {
     "ember-cli-babel": "^5.1.6",
     "ember-cli-htmlbars": "^1.0.3",
+    "ember-social": "plyfe/ember-social",
     "feedbackfruits-activities": "feedbackfruits/feedbackfruits-ui-activities"
   },
   "ember-addon": {

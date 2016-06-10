@@ -3,5 +3,5 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   layout,
-  classNames: 'fbf-navigation__header'
+  classNames: 'fbf-navigation__header header-item-container',
 });
