@@ -1,7 +1,3 @@
-/*
-  labels.type => array
-  $priority => label ~> "prio: $priority"
- */
  function parse(issue, regex, setter, nolabel) {
    let label = issue.get('labels').find((item) => item.get('name').match(regex));
 
@@ -24,8 +20,6 @@ function setType(issue) {
   parse(issue, regex, 'type', 'no type');
 }
 function compare(a, b) {
-  /*jshint curly: false */
-
   let convertLabel = {
     high: 1,
     medium: 0,
@@ -34,8 +28,8 @@ function compare(a, b) {
   };
 
   if(a.get('state') === b.get('state')){
-    if(convertLabel[a.get('priority')] < convertLabel[b.get('priority')]) return 1;
-    if(convertLabel[a.get('priority')] > convertLabel[b.get('priority')]) return -1;
+    if(convertLabel[a.get('priority')] < convertLabel[b.get('priority')]){ return 1; }
+    if(convertLabel[a.get('priority')] > convertLabel[b.get('priority')]){ return -1; }
   }
   else if(a.get('state') === 'open') {
     return -1;
@@ -43,7 +37,6 @@ function compare(a, b) {
   else if(b.get('state') === 'open') {
     return 1;
   }
-  /*jshint curly: true */
 
   return 0;
 }
