@@ -5,9 +5,5 @@ export default Ember.Component.extend({
   layout,
 
   classNames: 'priority issue_badge',
-  classNameBindings: ['priority'],
-
-  priority: Ember.computed('prio', function(){
-    return this.get('prio');
-  })
+  classNameBindings: ['prio'],
 });
