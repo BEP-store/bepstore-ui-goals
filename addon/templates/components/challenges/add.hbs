@@ -23,6 +23,14 @@
     {{/fbf-text}}
     {{#fbf-text}}
       <em>Milestone names are created in the <a href="http://semver.org" target="_blank">Semantic Versioning</a> style (v.1.0.0)</em>
+      {{#fbf-item class="milestone-bump"}}
+        {{#fbf-btn isBgDark=new.major action='selectMajor'}}
+          Major
+        {{/fbf-btn}}
+        {{#fbf-btn isBgDark=new.minor action='selectMinor'}}
+          Minor
+        {{/fbf-btn}}
+      {{/fbf-item}}
       {{fbf-textfield fullwidth=true label="Milestone description:" value=new.description}}
     {{/fbf-text}}
   {{else if isIssue}}

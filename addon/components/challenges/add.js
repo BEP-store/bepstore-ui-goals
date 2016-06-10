@@ -1,4 +1,5 @@
 import layout from 'bepstore-goals/templates/components/challenges/add';
+import semver from 'bepstore-goals/utils/semver';
 import Ember from 'ember';
 import ClickOutside from 'bepstore-goals/mixins/click-outside';
 
@@ -41,7 +42,24 @@ export default Ember.Component.extend(ClickOutside, {
         }
       }
       else if(this.get('isMilestone')){
-        alert('not implemented');
+        let version = semver.parse(this.get('model.challenges.lastObject.title'));
+        if(this.get('new.major')) {
+          version[0]++;
+        }
+        else if(this.get('new.minor')) {
+          version[1]++;
+        } else {
+          return null;
+        }
+        this.get('model.repos').forEach((repo) =>{
+          let milestone = this.get('store').createRecord('milestone',{
+            title: `${version[0]}.${version[1]}.0`,
+            description: this.get('new.description'),
+            state: 'open',
+            repo: repo
+          });
+          milestone.save().then(() => alert(milestone.get('title')) );
+        });
       }
       else if(this.get('isIssue')){
         alert('not implemented');
@@ -54,6 +72,14 @@ export default Ember.Component.extend(ClickOutside, {
     saveDismiss(){
       this.actions.save.bind(this)();
       this.actions.dismiss.bind(this)();
+    },
+    selectMajor(){
+      this.set('new.major', true);
+      this.set('new.minor', false);
+    },
+    selectMinor(){
+      this.set('new.major', false);
+      this.set('new.minor', true);
     }
   },
 
