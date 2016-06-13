@@ -37,7 +37,10 @@
     {{#fbf-text}}
       To add a Issue, indicate what Milestone and Repository the issue belongs to. Add a title and an optional description.
     {{/fbf-text}}
-    {{fbf-text "bedenk 2 dropdown menu's"}}
+    {{component 'bepstore-goals@challenges/dropdown-select' class="left" type="Milestone" model=new options=model.challenges readValue='title'}}
+    {{component 'bepstore-goals@challenges/dropdown-select' class="right" type="Repository" model=new options=model.repos readValue='id'}}
+    {{component 'bepstore-goals@challenges/dropdown-select' class="left" type="Priority" model=new options=optionsPriority}}
+    {{component 'bepstore-goals@challenges/dropdown-select' class="right" type="Type" model=new options=optionsType}}
     {{fbf-textfield fullwidth=true label="Title:" value=new.title}}
     {{fbf-textarea fullwidth=true label="Descriptoin:" value=new.description}}
   {{/if}}

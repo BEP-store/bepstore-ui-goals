@@ -10,6 +10,20 @@ export default Ember.Component.extend(ClickOutside, {
 
   store: service(),
 
+  optionsType: [
+    {value: "enhancement"},
+    {value: "feature"},
+    {value: "fix"},
+    {value: "refactor"},
+    {value: "style"}
+  ],
+  optionsPriority: [
+    {value: "high"},
+    {value: "medium"},
+    {value: "low"}
+  ],
+
+
   isRepo: equal('type', 'Repository'),
   isMilestone: equal('type', 'Milestone'),
   isIssue: equal('type', 'Issue'),
@@ -62,6 +76,12 @@ export default Ember.Component.extend(ClickOutside, {
         });
       }
       else if(this.get('isIssue')){
+        console.log(this.get('new.title'));
+        console.log(this.get('new.description'));
+        console.log(this.get('new.Milestone'));
+        console.log(this.get('new.Repository'));
+        console.log(this.get('new.Priority'));
+        console.log(this.get('new.Type'));
         alert('not implemented');
       }
     },
@@ -84,6 +104,6 @@ export default Ember.Component.extend(ClickOutside, {
   },
 
   clickOutside() {
-    this.sendAction('close');
+    //this.sendAction('close');
   }
 });
