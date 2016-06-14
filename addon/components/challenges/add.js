@@ -91,7 +91,6 @@ export default Ember.Component.extend(ClickOutside, {
               .milestones.findBy('repo.fullName', route)
               .get('number');
               let issue = this.get('store').createRecord('issue', {
-                id: 80,
                 title: this.get('new.title'),
                 body: this.get('new.description'),
                 milestone: milestoneNr,
