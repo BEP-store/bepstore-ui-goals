@@ -1,18 +1,20 @@
-<div class="title_bar">
-  {{model.title}}
-</div>
-<div class="issue_info">
-  {{#component 'bepstore-goals@badge/priority-badge' prio=model.priority}}
-    Prio: {{model.priority}}
-  {{/component}}
-  {{#component 'bepstore-goals@badge/type-badge' type=model.type}}
-    {{model.type}}
-  {{/component}}
-  {{model.repo.id}}
-</div>
-<div class="body_content">
-  {{model.body}}
-</div>
-<div class="status_bar {{model.state}}">
- Status: {{model.state}}
-</div>
+<a href="https://github.com/{{model.repo.id}}/issues/{{model.number}}" target="_blank">
+  <div class="title_bar">
+    {{model.title}}
+  </div>
+  <div class="issue_info">
+    {{#component 'bepstore-goals@badge/priority-badge' prio=model.priority}}
+      Prio: {{model.priority}}
+    {{/component}}
+    {{#component 'bepstore-goals@badge/type-badge' type=model.type}}
+      {{model.type}}
+    {{/component}}
+    {{model.repo.id}}
+  </div>
+  <div class="body_content">
+    {{model.body}}
+  </div>
+  <div class="status_bar {{model.state}}">
+   Status: {{model.state}}
+  </div>
+</a>

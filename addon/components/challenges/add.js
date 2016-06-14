@@ -47,7 +47,7 @@ export default Ember.Component.extend(ClickOutside, {
               type: 'repo'
             });
             this.get('model').save().then(() => {
-              this.set('new.link', '');
+              this.actions.cleanUp.bind(this)();
             });
           });
         }
@@ -56,6 +56,9 @@ export default Ember.Component.extend(ClickOutside, {
         }
       }
       else if(this.get('isMilestone')){
+        if(!this.get('new.description')){
+          return null;
+        }
         let version = semver.parse(this.get('model.challenges.lastObject.title'));
         if(this.get('new.major')) {
           version[0]++;
@@ -72,17 +75,38 @@ export default Ember.Component.extend(ClickOutside, {
             state: 'open',
             repo: repo
           });
-          milestone.save().then(() => alert(milestone.get('title')) );
+          milestone.save().then(() => {
+            this.actions.cleanUp.bind(this)();
+          });
         });
       }
       else if(this.get('isIssue')){
-        console.log(this.get('new.title'));
-        console.log(this.get('new.description'));
-        console.log(this.get('new.Milestone'));
-        console.log(this.get('new.Repository'));
-        console.log(this.get('new.Priority'));
-        console.log(this.get('new.Type'));
-        alert('not implemented');
+        if( this.get('new.title') && this.get('new.description') && this.get('new.Milestone') && this.get('new.Repository') && this.get('new.Priority') && this.get('new.Type')){
+          let route = this.get('new.Repository');
+          this.get('store').findRecord('label',  route + '/labels/prio:' + this.get('new.Priority')).then((prioLabel) => {
+            this.get('store').findRecord('label',  route + '/labels/type:' + this.get('new.Type')).then((typeLabel) => {
+              let labels = [prioLabel, typeLabel];
+              let milestoneNr = this.get('model.challenges')
+              .findBy('title',this.get('new.Milestone'))
+              .milestones.findBy('repo.fullName', route)
+              .get('number');
+              let issue = this.get('store').createRecord('issue', {
+                id: 80,
+                title: this.get('new.title'),
+                body: this.get('new.description'),
+                milestone: milestoneNr,
+                labels: labels
+              });
+
+              issue.save().then(() => {
+                this.actions.cleanUp.bind(this)();
+              });
+            });
+          });
+        }
+        else {
+          return null;
+        }
       }
     },
     dismiss(){
@@ -100,6 +124,9 @@ export default Ember.Component.extend(ClickOutside, {
     selectMinor(){
       this.set('new.major', false);
       this.set('new.minor', true);
+    },
+    cleanUp(){
+      this.set('new',[]);
     }
   },
 

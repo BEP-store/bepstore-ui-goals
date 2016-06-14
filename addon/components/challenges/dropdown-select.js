@@ -4,7 +4,6 @@ import ClickOutside from 'bepstore-goals/mixins/click-outside';
 
 export default Ember.Component.extend(ClickOutside, {
   layout,
-  type: '',
   classNames: 'dropdown-container',
   isOpen: false,
   selection: null,

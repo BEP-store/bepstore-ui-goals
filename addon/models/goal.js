@@ -103,7 +103,7 @@ export default Activity.extend({
             return memo;
           }, { openIssues: 0, closedIssues: 0, state: 'closed' });
 
-        return Object.assign({}, { title, issues }, statistics);
+        return Object.assign({}, { title, issues, milestones }, statistics);
        });
 
      return challenges;
