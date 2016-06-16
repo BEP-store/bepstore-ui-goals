@@ -140,7 +140,7 @@ export default Ember.Component.extend({
     },
     cleanUp(){
       this.set('new',[]);
-      this.set('model.minor',true);
+      this.set('new.minor',true);
     }
   }
 });
