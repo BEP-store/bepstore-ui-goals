@@ -1,0 +1,20 @@
+<div class="dropdown-selection" {{action 'open'}}>
+  {{#if selection}}
+    {{#fbf-text}}
+      <strong>{{type}}: {{selection}}</strong>
+    {{/fbf-text}}
+  {{else}}
+    {{#fbf-text}}
+      Select a {{type}}
+    {{/fbf-text}}
+  {{/if}}
+</div>
+{{#if isOpen}}
+  {{#fbf-item class="dropdown-menu"}}
+    {{#each options as |option|}}
+      <div class="dropdown-menu-item" {{action "select" option.value}}>
+        {{option.value}}
+      </div>
+    {{/each}}
+  {{/fbf-item}}
+{{/if}}
