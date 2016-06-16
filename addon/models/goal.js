@@ -40,6 +40,8 @@ export default Activity.extend({
   head_frontend: belongsTo('user', { inverse: null }),
   head_backend: belongsTo('user', { inverse: null }),
 
+  design: belongsTo('media'),
+
   resources: attr({ defaultValue: [] }),
 
   repos: hasMany('repos'),
