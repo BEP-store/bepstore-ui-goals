@@ -1,0 +1,5 @@
+{{#fbf-text}}
+  Give an update about the current state of the project. You can indicate the status of your goal in short by editing the status-label, and give a more descriptive update in text.
+{{/fbf-text}}
+{{component 'bepstore-goals@challenges/dropdown-select' class="center" type="Status" model=model options=statusOptions }}
+{{fbf-textarea rows=5 fullwidth=true label="Update:" value=model.update}}

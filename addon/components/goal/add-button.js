@@ -35,6 +35,10 @@ export default Component.extend(ClickOutside, {
     addIssue(){
       this.get('add')("Issue");
       this.toggleProperty('_isBottomSheetShown');
+    },
+    addUpdate(){
+      this.get('add')("Update");
+      this.toggleProperty('_isBottomSheetShown');      
     }
   },
 
