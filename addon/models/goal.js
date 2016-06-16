@@ -6,7 +6,7 @@ import Ember from 'ember';
 import semver from 'bepstore-goals/utils/semver';
 import issueFun from 'bepstore-goals/utils/issueFun';
 
-const { computed } = Ember;
+const { isPresent, computed } = Ember;
 
 export default Activity.extend({
   engine: attr('string', { defaultValue: 'goals' }),
@@ -41,6 +41,15 @@ export default Activity.extend({
   head_backend: belongsTo('user', { inverse: null }),
 
   design: belongsTo('media'),
+
+  design_url: computed('design.id', function() {
+    if (isPresent(this.get('design'))) {
+      return this.get('design.content').urlForType('png', {
+        resize: '800x300',
+        resizemode: 'crop'
+      });
+    }
+  }),
 
   resources: attr({ defaultValue: [] }),
 

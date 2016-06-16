@@ -15,9 +15,13 @@
     <h3>Design</h3>
     {{#fbf-card}}
       {{#fbf-item class="design_item"}}
-        <div {{action "uploadDesign"}}>
-          Feel free to imagine a drag and drop field here
-        </div>
+        {{#if model.design}}
+          {{fbf-image src=model.designUrl}}
+        {{else}}
+          <div {{action "uploadDesign"}}>
+            Feel free to imagine a drag and drop field here
+          </div>
+        {{/if}}
       {{/fbf-item}}
     {{/fbf-card}}
     <h3>Challenges</h3>
