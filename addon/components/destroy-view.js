@@ -2,5 +2,12 @@ import ActivitiesBaseDestroyView from 'feedbackfruits-activities/components/dest
 import layout from '../templates/components/destroy-view';
 
 export default ActivitiesBaseDestroyView.extend({
-  layout
+  layout,
+  actions: {
+    destroy: function() {
+      this.get('model').destroyRecord().then(() => {
+        window.location.replace("http://localhost.feedbackfruits.com:4200/mygoals");
+      });
+    }
+  }
 });

@@ -21,8 +21,6 @@ export default ActivitiesBaseNewView.extend({
  actions: {
    save() {
      /* jshint ignore:start */
-     let save = this._super.bind(this, ...arguments);
-
       let attrs = {
         title: this.get('model.title'),
         description: this.get('model.description'),
@@ -38,7 +36,9 @@ export default ActivitiesBaseNewView.extend({
 
       this.get('model').deleteRecord();
       this.set('model', model);
-      save();
+      this.get('model').save().then(() => {
+        window.location.replace("http://localhost.feedbackfruits.com:4200/mygoals");
+      })
       /* jshint ignore:end */
    }
  }
