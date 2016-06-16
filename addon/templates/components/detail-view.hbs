@@ -18,15 +18,17 @@
         Feel free to imagine a drag and drop field here
       {{/fbf-item}}
     {{/fbf-card}}
-    <h3>Challenges</h3>
-    {{#fbf-card}}
-      {{#fbf-item class="challenges_item" }}
-        <div class="timeline_container">
-            {{#each model.challenges as |milestone index|}}
-              {{component 'bepstore-goals@challenges/milestone' model=milestone index=index length=model.challenges.length}}
-            {{/each}}
-        </div>
-      {{/fbf-item}}
-    {{/fbf-card}}
+    {{#if showChallenges}}
+      <h3>Challenges</h3>
+      {{#fbf-card}}
+        {{#fbf-item class="challenges_item" }}
+          <div class="timeline_container">
+              {{#each model.challenges as |milestone index|}}
+                {{component 'bepstore-goals@challenges/milestone' model=milestone index=index length=model.challenges.length}}
+              {{/each}}
+          </div>
+        {{/fbf-item}}
+      {{/fbf-card}}
+    {{/if}}
   {{/component}}
 </div>

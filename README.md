@@ -1,4 +1,5 @@
 # Bepstore-ui-goals
+[![Code Climate](https://codeclimate.com/github/feedbackfruits/bepstore-ui-goals/badges/gpa.svg)](https://codeclimate.com/github/feedbackfruits/bepstore-ui-goals)
 
 This README outlines the details of collaborating on this Ember addon.
 
