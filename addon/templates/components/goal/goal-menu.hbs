@@ -24,14 +24,16 @@
         {{#fbf-text light=true}}Show...{{/fbf-text}}
       </div>
         {{#if _showGoTo}}
-          {{#fbf-item borderTop=true}}
-            <div class="fbf-item__content" {{action 'showRepo'}}>
-              {{#fbf-text light=true}}Github Repositories:{{/fbf-text}}
-              {{#if _showRepos}}
-                {{component 'bepstore-goals@goal/goal-menu/github' model=model}}
-              {{/if}}
-            </div>
-          {{/fbf-item}}
+          {{#if model.repo}}
+            {{#fbf-item borderTop=true}}
+              <div class="fbf-item__content" {{action 'showRepo'}}>
+                {{#fbf-text light=true}}Github Repositories:{{/fbf-text}}
+                {{#if _showRepos}}
+                  {{component 'bepstore-goals@goal/goal-menu/github' model=model}}
+                {{/if}}
+              </div>
+            {{/fbf-item}}
+          {{/if}}
           {{#fbf-item borderTop=true}}
             <div class="fbf-item__content" {{action 'showCore'}}>
               {{#fbf-text light=true}}Core Team members:{{/fbf-text}}

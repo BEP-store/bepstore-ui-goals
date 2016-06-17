@@ -14,11 +14,11 @@
     </div>
     <div class="fbf-modal__content">
       {{#if isRepo}}
-        {{challenges/add/add-repo model=new}}
+        {{component 'bepstore-goals@challenges/add/add-repo' model=new}}
       {{else if isMilestone}}
-        {{challenges/add/add-milestone model=new}}
+        {{component 'bepstore-goals@challenges/add/add-milestone' model=new}}
       {{else if isIssue}}
-        {{challenges/add/add-issue new=new model=model}}
+        {{component 'bepstore-goals@challenges/add/add-issue' new=new model=model}}
       {{/if}}
     </div>
     <div class="fbf-modal__footer">
@@ -46,7 +46,7 @@
         {{/fbf-item}}
     </div>
     <div class="fbf-modal__content">
-      {{challenges/add/give-update model=new}}
+      {{component 'bepstore-goals@challenges/add/give-update' model=new}}
     </div>
     <div class="fbf-modal__footer">
       {{#fbf-btn isColored=true disabled=model.isSaving action='dismiss'}}
