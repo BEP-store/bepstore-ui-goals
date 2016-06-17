@@ -8,11 +8,10 @@ export default ActivitiesBaseDetailView.extend({
   layout,
   session: service(),
 
-  show: Ember.observer('model', 'session.user', function(){
-    if(!this.get('session.user.id')) {
-      this.set('showChallenges', false);
-    } else {
-      this.set('showChallenges',this.get('model.challenges') && this.get('model.contributors').isAny('id', this.get('session.user.id')));
+  showChallenges: Ember.computed('session.user','model.challenges', function(){
+    if(this.get('session.user.id') && this.get('model.challenges.length') > 0 ) {
+      return this.get('model.contributors').isAny('id', this.get('session.user.id'));
     }
+    return false;
   })
 });

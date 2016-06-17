@@ -1,5 +1,5 @@
 function getAll(repos, dataName) {
-  repos.toArray().reduce((memo, repo) => {
+  return repos.toArray().reduce((memo, repo) => {
     return [].concat(memo, repo.get(dataName).toArray());
   }, []);
 }
