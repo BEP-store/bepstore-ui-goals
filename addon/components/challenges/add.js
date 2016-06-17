@@ -1,35 +1,22 @@
 import layout from 'bepstore-goals/templates/components/challenges/add';
 import semver from 'bepstore-goals/utils/semver';
 import Ember from 'ember';
-import ClickOutside from 'bepstore-goals/mixins/click-outside';
 
 const { computed: { equal }, inject: { service } } = Ember;
 
-export default Ember.Component.extend(ClickOutside, {
+export default Ember.Component.extend({
   layout,
 
   store: service(),
 
-  optionsType: [
-    {value: "enhancement"},
-    {value: "feature"},
-    {value: "fix"},
-    {value: "refactor"},
-    {value: "style"}
-  ],
-  optionsPriority: [
-    {value: "high"},
-    {value: "medium"},
-    {value: "low"}
-  ],
-
-
   isRepo: equal('type', 'Repository'),
   isMilestone: equal('type', 'Milestone'),
   isIssue: equal('type', 'Issue'),
+  isUpdate: equal('type', 'Update'),
 
   setStuff: Ember.on('init', function(){
     this.actions.cleanUp.bind(this)();
+    this.set('new.minor',true);
   }),
 
   actions: {
@@ -43,6 +30,9 @@ export default Ember.Component.extend(ClickOutside, {
       else if(this.get('isIssue')){
         this.actions.issueCreate.bind(this)();
       }
+      else if(this.get('isUpdate')){
+        this.actions.giveUpdate.bind(this)();
+      }
     },
     dismiss(){
       this.sendAction('close');
@@ -51,20 +41,6 @@ export default Ember.Component.extend(ClickOutside, {
     saveDismiss(){
       this.actions.save.bind(this)();
       this.actions.dismiss.bind(this)();
-    },
-    selectMajor(){
-      if(this.get('new.minor')){
-        this.actions.switchBump.bind(this)();
-      }
-    },
-    selectMinor(){
-      if(this.get('new.major')){
-        this.actions.switchBump.bind(this)();
-      }
-    },
-    switchBump(){
-      this.toggleProperty('new.minor');
-      this.toggleProperty('new.major');
     },
     repoCreate(){
       let regex = /https:\/\/github.com\/(\w+?\/[\w|-]+)\/?.*/;
@@ -137,13 +113,34 @@ export default Ember.Component.extend(ClickOutside, {
         return null;
       }
     },
+    giveUpdate(){
+      if(!this.get('new.update')){
+        return null;
+      }
+      switch (this.get('new.Status')) {
+        case 'specifying (sub-)challenges':
+          this.set('model.status','spec-design');
+          break;
+        case 'building the Goal':
+          this.set('model.status','building');
+          break;
+        case 'testing the Goal':
+          this.set('model.status','testing');
+          break;
+        case 'finished the Goal':
+          this.set('model.status','finished');
+          break;
+        default:
+          return null;
+      }
+      this.set('model.updateText', this.get('new.update'));
+      this.get('model').save().then(() =>{
+        this.actions.dismiss.bind(this)();
+      });
+    },
     cleanUp(){
       this.set('new',[]);
       this.set('new.minor',true);
     }
-  },
-
-  clickOutside() {
-    //this.sendAction('close');
   }
 });

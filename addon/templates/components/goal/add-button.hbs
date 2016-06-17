@@ -1,7 +1,7 @@
 {{fbf-btn position="fixed-bottomright" isFloating=true isColored=true icon="add" on-click="clickButton"}}
 {{#if _isBottomSheetShown}}
   {{#fbf-bottom-sheet}}
-    <div style="height:130px; width:130px">
+    <div style="height:130px; width:130px" {{action "addUpdate"}}>
       {{#fbf-bottom-sheet-item icon='feedback'}}
         Give a update/
         Release

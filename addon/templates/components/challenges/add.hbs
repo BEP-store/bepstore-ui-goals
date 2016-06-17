@@ -1,59 +1,60 @@
 {{#fbf-modal}}
-<div class="fbf-modal__header--style-dark">
-    {{#fbf-item}}
-      <div class="fbf-item__primary-icon" {{action 'dismiss'}}>
-        {{#fbf-icon}}close{{/fbf-icon}}
-      </div>
-      <div class="fbf-item__content">
-        {{#fbf-text title=true light=true}}
-          Add a {{type}}
-        {{/fbf-text}}
-      </div>
-    {{/fbf-item}}
-</div>
-<div class="fbf-modal__content">
-  {{#if isRepo}}
-    {{#fbf-text}}
-      To add a Github Repository, copy the url of the repository (<em>https://github.com/youraccount/...</em>) into the textfield below.
-    {{/fbf-text}}
-    {{fbf-textfield fullwidth=true label="Github Repository:" value=new.link}}
-  {{else if isMilestone}}
-    {{#fbf-text}}
-      To add a Milestone, click if it will be a Major release or a Minor release. Give a small description of what the focus of this milestone should be.
-    {{/fbf-text}}
-    {{#fbf-text}}
-      <em>Milestone names are created in the <a href="http://semver.org" target="_blank">Semantic Versioning</a> style (v.1.0.0)</em>
-      {{#fbf-item class="milestone-bump"}}
-        {{#fbf-btn isBgDark=new.major action='selectMajor'}}
-          Major
-        {{/fbf-btn}}
-        {{#fbf-btn isBgDark=new.minor action='selectMinor'}}
-          Minor
-        {{/fbf-btn}}
-      {{/fbf-item}}
-      {{fbf-textfield fullwidth=true label="Milestone description:" value=new.description}}
-    {{/fbf-text}}
-  {{else if isIssue}}
-    {{#fbf-text}}
-      To add a Issue, indicate what Milestone and Repository the issue belongs to. Add a title and an optional description.
-    {{/fbf-text}}
-    {{component 'bepstore-goals@challenges/dropdown-select' class="left" type="Milestone" model=new options=model.challenges readValue='title'}}
-    {{component 'bepstore-goals@challenges/dropdown-select' class="right" type="Repository" model=new options=model.repos readValue='id'}}
-    {{component 'bepstore-goals@challenges/dropdown-select' class="left" type="Priority" model=new options=optionsPriority}}
-    {{component 'bepstore-goals@challenges/dropdown-select' class="right" type="Type" model=new options=optionsType}}
-    {{fbf-textfield fullwidth=true label="Title:" value=new.title}}
-    {{fbf-textarea fullwidth=true label="Descriptoin:" value=new.description}}
-  {{/if}}
-</div>
-<div class="fbf-modal__footer">
-  {{#fbf-btn isColored=true disabled=model.isSaving action='dismiss'}}
-    Discard
-  {{/fbf-btn}}
-  {{#fbf-btn isColored=true disabled=saveDisabled action='saveDismiss'}}
-    Add
-  {{/fbf-btn}}
-  {{#fbf-btn isColored=true disabled=saveDisabled action='save'}}
-    Add &amp; Continue
-  {{/fbf-btn}}
-</div>
+  {{#unless isUpdate}}
+    <div class="fbf-modal__header--style-dark">
+        {{#fbf-item}}
+          <div class="fbf-item__primary-icon" {{action 'dismiss'}}>
+            {{#fbf-icon}}close{{/fbf-icon}}
+          </div>
+          <div class="fbf-item__content">
+            {{#fbf-text title=true light=true}}
+              Add a {{type}}
+            {{/fbf-text}}
+          </div>
+        {{/fbf-item}}
+    </div>
+    <div class="fbf-modal__content">
+      {{#if isRepo}}
+        {{component 'bepstore-goals@challenges/add/add-repo' model=new}}
+      {{else if isMilestone}}
+        {{component 'bepstore-goals@challenges/add/add-milestone' model=new}}
+      {{else if isIssue}}
+        {{component 'bepstore-goals@challenges/add/add-issue' new=new model=model}}
+      {{/if}}
+    </div>
+    <div class="fbf-modal__footer">
+      {{#fbf-btn isColored=true disabled=model.isSaving action='dismiss'}}
+        Discard
+      {{/fbf-btn}}
+      {{#fbf-btn isColored=true disabled=saveDisabled action='saveDismiss'}}
+        Add
+      {{/fbf-btn}}
+      {{#fbf-btn isColored=true disabled=saveDisabled action='save'}}
+        Add &amp; Continue
+      {{/fbf-btn}}
+    </div>
+  {{else}}
+    <div class="fbf-modal__header--style-dark">
+        {{#fbf-item}}
+          <div class="fbf-item__primary-icon" {{action 'dismiss'}}>
+            {{#fbf-icon}}close{{/fbf-icon}}
+          </div>
+          <div class="fbf-item__content">
+            {{#fbf-text title=true light=true}}
+              Give a Update
+            {{/fbf-text}}
+          </div>
+        {{/fbf-item}}
+    </div>
+    <div class="fbf-modal__content">
+      {{component 'bepstore-goals@challenges/add/give-update' model=new}}
+    </div>
+    <div class="fbf-modal__footer">
+      {{#fbf-btn isColored=true disabled=model.isSaving action='dismiss'}}
+        Discard
+      {{/fbf-btn}}
+      {{#fbf-btn isColored=true disabled=saveDisabled action='save'}}
+        Add
+      {{/fbf-btn}}
+    </div>
+  {{/unless}}
 {{/fbf-modal}}

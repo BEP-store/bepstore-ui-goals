@@ -1,0 +1,15 @@
+{{#fbf-text}}
+  To add a Milestone, click if it will be a Major release or a Minor release. Give a small description of what the focus of this milestone should be.
+{{/fbf-text}}
+{{#fbf-text}}
+  <em>Milestone names are created in the <a href="http://semver.org" target="_blank">Semantic Versioning</a> style (v.1.0.0)</em>
+  {{#fbf-item class="milestone-bump"}}
+    {{#fbf-btn isBgDark=model.major action='selectMajor'}}
+      Major
+    {{/fbf-btn}}
+    {{#fbf-btn isBgDark=model.minor action='selectMinor'}}
+      Minor
+    {{/fbf-btn}}
+  {{/fbf-item}}
+  {{fbf-textfield fullwidth=true label="Milestone description:" value=model.description}}
+{{/fbf-text}}
