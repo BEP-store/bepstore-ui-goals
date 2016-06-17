@@ -4,6 +4,7 @@ import attr from 'ember-data/attr';
 import Ember from 'ember';
 
 import semver from 'bepstore-goals/utils/semver';
+import repoData from 'bepstore-goals/utils/repoData';
 import issueFun from 'bepstore-goals/utils/issueFun';
 
 const { computed } = Ember;
@@ -45,15 +46,11 @@ export default Activity.extend({
   repos: hasMany('repos'),
 
   milestones: computed('repos.@each.milestones', function() {
-    return this.get('repos').toArray().reduce((memo, repo) => {
-      return [].concat(memo, repo.get('milestones').toArray());
-    }, []);
+    return repoData.getAll(this.get('repos'),'milestones');
   }),
 
   issues: computed('repos.@each.issues', function() {
-    return this.get('repos').toArray().reduce((memo, repo) => {
-      return [].concat(memo, repo.get('issues').toArray());
-    }, []);
+    return repoData.getAll(this.get('repos'),'issues');
   }),
 
   challenges: computed('milestones.@each.issues', function() {
@@ -64,7 +61,7 @@ export default Activity.extend({
        // Filter non-SEMVER titles
        .filter(title => {
          let version = semver.parse(title);
-         return version != null;
+         return version !== null;
        })
        // Get all unique titles
        .uniq()

@@ -2,20 +2,22 @@ import Ember from 'ember';
 import layout from 'bepstore-goals/templates/components/goal/add-button';
 import ClickOutside from 'bepstore-goals/mixins/click-outside';
 
-const { Component, inject: { service }, computed: { equal }, computed, getOwner } = Ember;
+const { Component, on, inject: { service }, computed: { equal }, computed, getOwner } = Ember;
 
 export default Component.extend(ClickOutside, {
   layout,
   session: service(),
 
+  setPath: on('init', function(){
+    this.set('path', getOwner(this).lookup('controller:application').currentPath);
+  }),
+
   destroyRoute: computed('model', function(){
-    let path = getOwner(this).lookup('controller:application').currentPath;
-    return path.replace("show.index", "show.destroy");
+    return this.get('path').replace("show.index", "show.destroy");
   }),
 
   editRoute: computed('model', function(){
-    let path = getOwner(this).lookup('controller:application').currentPath;
-    return path.replace("show.index", "show.edit");
+    return this.get('path').replace("show.index", "show.edit");
   }),
 
   actions: {
