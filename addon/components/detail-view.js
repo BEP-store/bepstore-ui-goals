@@ -16,7 +16,7 @@ export default ActivitiesBaseDetailView.extend({
     return false;
   }),
 
-  messages: Ember.on('init', function() {
-    return this.get('store').peekAll('chat-message');
+  setMessages: Ember.on('init', function() {
+    this.set('messages',this.get('store').peekAll('chat-message'));
   })
 });
