@@ -1,8 +1,4 @@
 {{#if selection.content}}
-  <h3>{{title}}</h3>
+  <h4>{{title}}</h4>
   {{component 'bepstore-goals@goal/goal-list' model=selection.content route="index.mygoals"}}
-<!--
-  {{#each sortedGoals as |goal|}}
-    {{component 'bepstore-goals@list-item' model=goal route="index.mygoals"}}
-  {{/each}} -->
 {{/if}}
