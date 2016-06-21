@@ -14,9 +14,5 @@ export default ActivitiesBaseDetailView.extend({
       return this.get('model.contributors').isAny('id', this.get('session.user.id'));
     }
     return false;
-  }),
-
-  setMessages: Ember.on('init', function() {
-    this.set('messages',this.get('store').peekAll('chat-message'));
   })
 });
