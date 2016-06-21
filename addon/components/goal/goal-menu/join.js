@@ -7,10 +7,6 @@ export default Ember.Component.extend({
   layout,
   session: service(),
 
-  isContributor: Ember.computed('model', function(){
-    return this.get('model.contributors').isAny('id', this.get('session.user.id'));
-  }),
-
   actions: {
     addContributor(role) {
       this.get('model.contributors').pushObject(this.get('session.user'));

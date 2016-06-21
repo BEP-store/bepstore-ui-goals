@@ -10,14 +10,16 @@
 {{#if _isExpanded}}
   <div class="fbf-notifications__window goal_menu">
     <h5> Options </h5>
-    {{#fbf-item borderTop=true }}
-      <div class="fbf-item__content" {{action "showContributors"}}>
-        {{#fbf-text light=true}}Refruit yourself as...{{/fbf-text}}
-        {{#if _showContributors}}
-          {{component 'bepstore-goals@goal/goal-menu/join' model=model}}
-        {{/if}}
-      </div>
-    {{/fbf-item}}
+    {{#if mayContribute}}
+      {{#fbf-item borderTop=true }}
+        <div class="fbf-item__content" {{action "showContributors"}}>
+          {{#fbf-text light=true}}Refruit yourself as...{{/fbf-text}}
+          {{#if _showContributors}}
+            {{component 'bepstore-goals@goal/goal-menu/join' model=model isContributor=isContributor}}
+          {{/if}}
+        </div>
+      {{/fbf-item}}
+    {{/if}}
     {{#fbf-item borderTop=true }}
       <div class="fbf-item__content">
       <div {{action "showGoTo"}}>
@@ -45,5 +47,8 @@
         {{/if}}
       </div>
     {{/fbf-item}}
+    {{#unless missesGithub}}
+      {{link-provider-button provider='github'}}
+    {{/unless}}
   </div>
 {{/if}}
