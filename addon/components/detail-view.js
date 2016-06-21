@@ -7,7 +7,6 @@ const { inject: { service } } = Ember;
 export default ActivitiesBaseDetailView.extend({
   layout,
   session: service(),
-  store: service(),
 
   showChallenges: Ember.computed('session.user','model.challenges', function(){
     if(this.get('session.user.id') && this.get('model.challenges.length') > 0 ) {
