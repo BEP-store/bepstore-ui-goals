@@ -6,7 +6,8 @@ export default ActivitiesBaseDestroyView.extend({
   actions: {
     destroy: function() {
       this.get('model').destroyRecord().then(() => {
-        window.location.replace("http://bepstore.feedbackfruits.com/mygoals");
+        history.back();
+        history.back();
       });
     }
   }
