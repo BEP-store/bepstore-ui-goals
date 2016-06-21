@@ -1,7 +1,9 @@
 {{#fbf-item borderTop=true class="menu_item"}}
-  <div class="fbf-item__content" {{action 'toUser' model.product_owner.id}}>
-    {{#fbf-text light=true}}Product Owner: {{model.product_owner.name}}{{/fbf-text}}
-  </div>
+  <a href="/users/{{model.product_owner.id}}" target="_blank">
+    <div class="fbf-item__content">
+      {{#fbf-text light=true}}Product Owner: {{model.product_owner.name}}{{/fbf-text}}
+    </div>
+  </a>
 {{/fbf-item}}
 {{#if model.head_design}}
   {{#fbf-item borderTop=true class="menu_item"}}
