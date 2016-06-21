@@ -8,6 +8,9 @@ export default Ember.Component.extend({
   layout,
 
   store: service(),
+  session: service(),
+  account: service(),
+  ajax: service(),
 
   isRepo: equal('type', 'Repository'),
   isMilestone: equal('type', 'Milestone'),
@@ -70,44 +73,44 @@ export default Ember.Component.extend({
       let version = semver.parse(this.get('model.challenges.lastObject.title'));
       if(this.get('new.major')) {
         version[0]++;
+        version[1] = 0;
       }
       else if(this.get('new.minor')) {
         version[1]++;
       }
       this.get('model.repos').forEach((repo) =>{
-        let milestone = this.get('store').createRecord('milestone',{
-          title: `${version[0]}.${version[1]}.0`,
+        let milestone = {
+          title: `V${version[0]}.${version[1]}.0`,
           description: this.get('new.description'),
-          state: 'open',
-          repo: repo
-        });
-        milestone.save().then(() => {
-          this.actions.cleanUp.bind(this)();
-        });
+        };
+        let response = this.actions.sendRequest.bind(this)(JSON.stringify(milestone), repo.id, 'milestones')
+          .then(response => {
+            let m = this.get('store').push(this.get('store').normalize( 'milestone', response) );
+            this.get('model.milestones').addObject(m);
+          })
       });
+      this.actions.cleanUp.bind(this)();
     },
     issueCreate(){
-      if( this.get('new.title') && this.get('new.description') && this.get('new.Milestone') && this.get('new.Repository') && this.get('new.Priority') && this.get('new.Type')){
+      if( this.get('new.title') && this.get('new.Milestone') && this.get('new.Repository') && this.get('new.Priority') && this.get('new.Type')){
         let route = this.get('new.Repository');
-        this.get('store').findRecord('label',  route + '/labels/prio:' + this.get('new.Priority')).then((prioLabel) => {
-          this.get('store').findRecord('label',  route + '/labels/type:' + this.get('new.Type')).then((typeLabel) => {
-            let labels = [prioLabel, typeLabel];
-            let milestoneNr = this.get('model.challenges')
-            .findBy('title',this.get('new.Milestone'))
-            .milestones.findBy('repo.fullName', route)
-            .get('number');
-            let issue = this.get('store').createRecord('issue', {
-              title: this.get('new.title'),
-              body: this.get('new.description'),
-              milestone: milestoneNr,
-              labels: labels
-            });
+        let labels = ['prio:' + this.get('new.Priority'), 'type:' + this.get('new.Type')];
+        let milestone = this.get('model.challenges')
+        .findBy('title',this.get('new.Milestone'))
+        .milestones.findBy('repo.fullName', route);
 
-            issue.save().then(() => {
-              this.actions.cleanUp.bind(this)();
-            });
-          });
-        });
+        let issue = {
+          title: this.get('new.title'),
+          body: this.get('new.description'),
+          milestone: milestone.get('number'),
+          labels: labels
+        };
+
+        let response = this.actions.sendRequest.bind(this)(JSON.stringify(issue), route, 'issues');
+        if(response){
+          this.get('store').createRecord('issue', response);
+          this.actions.cleanUp.bind(this)();
+        }
       }
       else {
         return null;
@@ -141,6 +144,23 @@ export default Ember.Component.extend({
     cleanUp(){
       this.set('new',[]);
       this.set('new.minor',true);
+    },
+    sendRequest(data,id,type){
+      let accessToken = this.get('session.data.authenticated.access_token');
+      let host = this.get('account.host');
+      let url = `${host}/provide/github/repos/${id}/${type}`;
+
+      return this.get('ajax').request(url, {
+        type: 'POST',
+        data: data,
+        dataType: 'json',
+        headers: {
+         'Content-Type': 'application/json',
+         'Authorization': `Bearer ${accessToken}`
+       }
+      }).then((response) => {
+        return response;
+      });
     }
   }
 });
