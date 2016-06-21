@@ -19,11 +19,8 @@ export default FbfNavItem.extend(ClickOutside, {
   _showCore: false,
 
   isLoggedIn: Ember.computed('session.user', function(){
-    if(this.get('session.user.id')) {
-      return true;
-    }
-    return false;
-  }),
+      return !!this.get('session.user.id');
+    }),
 
   hasGithub: Ember.computed('account.me.identities.[]', function(){
     return this.get('account').isAuthorized('github');
