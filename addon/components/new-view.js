@@ -37,7 +37,7 @@ export default ActivitiesBaseNewView.extend({
       this.get('model').deleteRecord();
       this.set('model', model);
       this.get('model').save().then(() => {
-        window.location.replace("http://localhost.feedbackfruits.com:4200/mygoals");
+        history.back();
       })
       /* jshint ignore:end */
    }
