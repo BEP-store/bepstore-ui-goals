@@ -47,8 +47,10 @@
         {{/if}}
       </div>
     {{/fbf-item}}
-    {{#unless missesGithub}}
-      {{link-provider-button provider='github'}}
-    {{/unless}}
+    {{#if missesGithub}}
+      {{#fbf-text light=true borderTop=true}}
+        {{link-provider-button provider='github'}}
+      {{/fbf-text}}
+    {{/if}}
   </div>
 {{/if}}
