@@ -10,6 +10,40 @@ export default FbfNavItem.extend(ClickOutside, {
   classNames: 'right',
   hasIcon: true,
   session: service(),
+  account: service(),
+
+  _isExpanded: false,
+  _showContributors: false,
+  _showGoTo: false,
+  _showRepos: false,
+  _showCore: false,
+
+  isLoggedIn: Ember.computed('session.user', function(){
+      return !!this.get('session.user.id');
+    }),
+
+  hasGithub: Ember.computed('account.me.identities.[]', function(){
+    return this.get('account').isAuthorized('github');
+  }),
+
+  isContributor: Ember.computed('model', function(){
+    return this.get('model.contributors').isAny('id', this.get('session.user.id'));
+  }),
+
+  mayContribute: Ember.computed('hasGithub', 'isLoggedIn', 'isContributor', function(){
+    if(this.get('isLoggedIn') && this.get('hasGithub')){
+      return !this.get('isContributor') ||
+             !(this.get('model.head_design.id') &&
+               this.get('model.head_frontend.id') &&
+               this.get('model.head_backend.id'));
+
+    }
+    return false;
+  }),
+
+  missesGithub: Ember.computed('hasGithub', 'isLoggedIn', function(){
+    return this.get('isLoggedIn') && !this.get('hasGithub');
+  }),
 
   actions: {
     clickButton() {
@@ -34,12 +68,6 @@ export default FbfNavItem.extend(ClickOutside, {
       this.set('_showRepos', false);
     }
   },
-
-  _isExpanded: false,
-  _showContributors: false,
-  _showGoTo: false,
-  _showRepos: false,
-  _showCore: false,
 
   clickOutside() {
     this.set('_isExpanded', false);
