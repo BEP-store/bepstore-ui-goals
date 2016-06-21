@@ -1,11 +1,11 @@
-<div class=goal_container>
+<!-- <div class=goal_container>
   <div class="goal_con_upper" {{action "showDescr"}}>
     <div class="goal_title goal_left">
       {{model.title}}
       {{component 'bepstore-goals@badge/status-badge' status=model.status size="small"}}
     </div>
     <div class="goal_volunteers goal_right">
-      Volunteers: {{model.contributors.length}}
+        {{mdl-icon badge=model.contributors.length icon='group' class="mdl-badge--overlap"}}
     </div>
   </div>
   {{#if showAll}}
@@ -23,4 +23,24 @@
     </div>
   </div>
   {{/if}}
-</div>
+</div> -->
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">{{model.title}}</h2>
+  </div>
+  {{#if showAll}}
+    <div class="mdl-card__supporting-text">
+      {{model.description}}
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" {{action "open"}}>
+        Go to Goal!
+      </a>
+    </div>
+  {{!else}}
+    {{!mdl-button icon='expand_more' isColored=false action='showDescr'}}
+  {{/if}}
+  <div class="mdl-card__menu">
+      {{component 'bepstore-goals@badge/status-badge' status=model.status size="small" class="inline-block"}}
+      {{mdl-icon badge=model.contributors.length icon='group' class='mdl-badge--overlap'}}
+      {{mdl-button icon='expand_more' isColored=false action='showDescr' class="{{if isFast 'zoooom' 'putt-putt-putt'}}"}}
+  </div>
