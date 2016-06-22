@@ -5,31 +5,12 @@ $spacehorizontal: 5%
 .ember-text-field, .ember-text-area
   color: black
 
-.circle
- background-color: black
- color: white
- border-radius: 50%
- padding-top: 25px
- height: 75px
- width: 100px
- position: absolute
+.core-team-list li
+ width: 49%
+ display: inline-flex
 
-.PO
- left: $spacehorizontal
- top: $spacevertical + 100px
-
-.HD
- right: $spacehorizontal
- top: $spacevertical + 180px
-
-.HFE
- left: $spacehorizontal
- top: $spacevertical + 260px
-
-.HBE
- right: $spacehorizontal
- top: $spacevertical + 340px
-
+.vbottom
+ vertical-align: bottom
 
 .status_badge
  text-align: center
@@ -45,9 +26,7 @@ $spacehorizontal: 5%
  float: right
 
 .small_badge
- font-size: 16px
- width: 160px
- padding: 2px
+ color: white
  // margin-top: -20px
 
 .inline-block
@@ -62,14 +41,14 @@ $spacehorizontal: 5%
 .status_building
  background-color: blue
 
-.red, .status_testing
+.red .status_testing
  background-color: red
 
 .status_finished
  background-color: green
 
 .goal_container
- text-align: center
+ // text-align: center
  width: 100%
  display: inline-block
  // .mdl-button

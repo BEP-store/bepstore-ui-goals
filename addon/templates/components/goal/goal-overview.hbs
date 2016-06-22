@@ -1,46 +1,21 @@
-<!-- <div class=goal_container>
-  <div class="goal_con_upper" {{action "showDescr"}}>
-    <div class="goal_title goal_left">
-      {{model.title}}
-      {{component 'bepstore-goals@badge/status-badge' status=model.status size="small"}}
-    </div>
-    <div class="goal_volunteers goal_right">
-        {{mdl-icon badge=model.contributors.length icon='group' class="mdl-badge--overlap"}}
-    </div>
+<div class="mdl-card__title">
+  <h2 class="mdl-card__title-text">{{model.title}}</h2>
+</div>
+{{#if showAll}}
+  <div class="mdl-card__supporting-text">
+    {{model.description}}
+    {{component 'bepstore-goals@goal/core-team' team=model}}
   </div>
-  {{#if showAll}}
-  <div class="goal_con_lower">
-    <div class="goal_descr goal_left">
-      <p>{{model.description}}</p>
-      <div {{action "open"}}>
-        {{#fbf-btn}}
-          Go to Goal!
-        {{/fbf-btn}}
-      </div>
-    </div>
-    <div class="goal_coret goal_right">
-      {{component 'bepstore-goals@goal/core-team' team=model}}
-    </div>
+  <div class="mdl-card__actions mdl-card--border">
+    {{mdl-button isRaised=true text='Go to goal' action="open"}}
   </div>
-  {{/if}}
-</div> -->
-  <div class="mdl-card__title">
-    <h2 class="mdl-card__title-text">{{model.title}}</h2>
-  </div>
-  {{#if showAll}}
-    <div class="mdl-card__supporting-text">
-      {{model.description}}
-    </div>
-    <div class="mdl-card__actions mdl-card--border">
-      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" {{action "open"}}>
-        Go to Goal!
-      </a>
-    </div>
-  {{!else}}
-    {{!mdl-button icon='expand_more' isColored=false action='showDescr'}}
-  {{/if}}
-  <div class="mdl-card__menu">
-      {{component 'bepstore-goals@badge/status-badge' status=model.status size="small" class="inline-block"}}
-      {{mdl-icon badge=model.contributors.length icon='group' class='mdl-badge--overlap'}}
-      {{mdl-button icon='expand_more' isColored=false action='showDescr' class="{{if isFast 'zoooom' 'putt-putt-putt'}}"}}
-  </div>
+{{/if}}
+<div class="mdl-card__menu">
+    {{mdl-icon badge=model.contributors.length icon='group' class='mdl-badge--overlap vbottom '}}
+    {{component 'bepstore-goals@badge/status-badge' status=model.status size='small' class='inline-block'}}
+    {{#if showAll}}
+      {{mdl-button icon='expand_less' isColored=false action='showDescr'}}
+    {{else}}
+      {{mdl-button icon='expand_more' isColored=false action='showDescr'}}
+    {{/if}}
+</div>
