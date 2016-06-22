@@ -12,7 +12,9 @@
     {{model.repo.id}}
   </div>
   <div class="body_content">
-    {{model.body}}
+    {{#if model.body}}
+      {{markdown-to-html model.body}}
+    {{/if}}
   </div>
   <div class="status_bar {{model.state}}">
    Status: {{model.state}}

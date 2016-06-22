@@ -81,13 +81,20 @@ $issueheight: 250px
   width: $issueheight*0.37
   margin-bottom: 5px
 
-.body_content
+.body_content,
  height: $issueheight*0.43
  margin-left: 0.5em
  margin-right: 0.5em
  font-size: 0.75em
  overflow-y: auto
  overflow-x: hidden
+ *,
+  font-size: inherit
+  margin: 0
+  line-height: 1.2em
+ ul
+  padding-left: 1.5em
+
 
 .status_bar
   height: $issueheight*0.10

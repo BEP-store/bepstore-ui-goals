@@ -5,7 +5,9 @@
        <h2 class="mdl-card__title-text">Description</h2>
     </div>
     <div class="mdl-card__supporting-text">
-      {{model.description}}
+      {{#if model.description}}
+        {{markdown-to-html model.description}}
+      {{/if}}
     </div>
   {{/fbf-card}}
 {{#fbf-card}}
@@ -13,7 +15,9 @@
      <h2 class="mdl-card__title-text">Status</h2>
   </div>
   <div class="mdl-card__supporting-text">
-    {{model.updateText}}
+    {{#if model.updateText}}
+      {{markdown-to-html model.updateText}}
+    {{/if}}
   </div>
   <div class="mdl-card__menu">
     {{component 'bepstore-goals@badge/status-badge' status=model.status size="big"}}

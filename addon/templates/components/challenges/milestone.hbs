@@ -6,7 +6,9 @@
   <div class="{{if finished "done "}}subchallenge_container mdl-shadow--2dp">
     {{#if model.description}}
       <div class="challenge_description">
-        {{model.description}}
+        {{#if model.description}}
+          {{markdown-to-html model.description}}
+        {{/if}}
       </div>
     {{/if}}
     <div class="overflow-container">
