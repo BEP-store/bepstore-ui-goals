@@ -3,7 +3,9 @@
 </div>
 {{#if showAll}}
   <div class="mdl-card__supporting-text">
-    {{model.description}}
+    {{#if model.description}}
+      {{markdown-to-html model.description}}
+    {{/if}}
     {{component 'bepstore-goals@goal/core-team' team=model}}
   </div>
   <div class="mdl-card__actions mdl-card--border">

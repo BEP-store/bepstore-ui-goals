@@ -8,6 +8,7 @@
       {{#if model.description}}
         {{markdown-to-html model.description}}
       {{/if}}
+      {{component 'bepstore-goals@goal/core-team' team=model}}
     </div>
   {{/fbf-card}}
 {{#fbf-card}}
