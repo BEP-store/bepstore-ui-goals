@@ -17,6 +17,17 @@ export default Ember.Component.extend({
   isIssue: equal('type', 'Issue'),
   isUpdate: equal('type', 'Update'),
 
+  allLabels: [
+    {name:"prio:high", color:"FF0000"},
+    {name:"prio:medium", color:"D3D3D3"},
+    {name:"prio:low", color:"B0E0E6"},
+    {name:"type:enhancement", color:"87CEEB"},
+    {name:"type:feature", color:"0000FF"},
+    {name:"type:fix", color:"FFA500"},
+    {name:"type:refactor", color:"FFEBCD"},
+    {name:"type:style", color:"C0C0C0"}
+  ],
+
   setStuff: Ember.on('init', function(){
     this.actions.cleanUp.bind(this)();
     this.set('new.minor',true);
@@ -57,6 +68,7 @@ export default Ember.Component.extend({
             route: repo.get('id'),
             type: 'repo'
           });
+          this.actions.setLabels.bind(this)(repo);
           this.get('model').save().then(() => {
             this.actions.cleanUp.bind(this)();
           });
@@ -70,7 +82,11 @@ export default Ember.Component.extend({
       if(!this.get('new.description')){
         return null;
       }
-      let version = semver.parse(this.get('model.challenges.lastObject.title'));
+      let last = this.get('model.challenges.lastObject.title');
+      let version = [0,0,0];
+      if(last){
+        version = semver.parse(this.get('model.challenges.lastObject.title'));
+      }
       if(this.get('new.major')) {
         version[0]++;
         version[1] = 0;
@@ -83,11 +99,11 @@ export default Ember.Component.extend({
           title: `V${version[0]}.${version[1]}.0`,
           description: this.get('new.description'),
         };
-        let response = this.actions.sendRequest.bind(this)(JSON.stringify(milestone), repo.id, 'milestones')
-          .then(response => {
+        this.actions.sendRequest.bind(this)(JSON.stringify(milestone), repo.id, 'milestones')
+          .then((response) => {
             let m = this.get('store').push(this.get('store').normalize( 'milestone', response) );
             this.get('model.milestones').addObject(m);
-          })
+          });
       });
       this.actions.cleanUp.bind(this)();
     },
@@ -106,11 +122,16 @@ export default Ember.Component.extend({
           labels: labels
         };
 
-        let response = this.actions.sendRequest.bind(this)(JSON.stringify(issue), route, 'issues');
-        if(response){
-          this.get('store').createRecord('issue', response);
+        this.actions.sendRequest.bind(this)(JSON.stringify(issue), route, 'issues')
+        .then((response) => {
+          let i = this.get('store').push(this.get('store').normalize( 'issue', response) );
+          // i.get('labels').map((label) => label.substr(label.lastIndexOf("/")+1));
+          // debugger;
+          this.get('model.challenges')
+                .findBy('title', milestone.get('title'))
+                .issues.addObject(i);
           this.actions.cleanUp.bind(this)();
-        }
+        });
       }
       else {
         return null;
@@ -158,8 +179,15 @@ export default Ember.Component.extend({
          'Content-Type': 'application/json',
          'Authorization': `Bearer ${accessToken}`
        }
-      }).then((response) => {
+     }).then((response) => {
         return response;
+      });
+    },
+    setLabels(repo){
+      let labels = this.get('allLabels');
+      //TODO: check if repo already has labels, cause this errors when label already exists
+      labels.forEach((label) => {
+        this.actions.sendRequest.bind(this)(JSON.stringify(label), repo.get('id'), 'labels');
       });
     }
   }
