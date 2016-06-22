@@ -41,8 +41,6 @@ export default Activity.extend({
   head_frontend: belongsTo('user', { inverse: null }),
   head_backend: belongsTo('user', { inverse: null }),
 
-  resources: attr({ defaultValue: [] }),
-
   repos: hasMany('repos'),
 
   milestones: computed('repos.@each.milestones', function() {

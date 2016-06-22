@@ -65,10 +65,6 @@ export default Ember.Component.extend({
         let id = link[1];
         return this.get('store').findRecord('repo', id).then(repo => {
           this.get('model.repos').addObject(repo);
-          this.get('model.resources').addObject({
-            route: repo.get('id'),
-            type: 'repo'
-          });
           this.actions.setLabels.bind(this)(repo);
           this.get('model').save().then(() => {
             this.actions.cleanUp.bind(this)();
