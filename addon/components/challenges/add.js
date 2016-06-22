@@ -36,16 +36,16 @@ export default Ember.Component.extend({
   actions: {
     save(){
       if(this.get('isRepo')){
-        this.actions.repoCreate.bind(this)();
+        return this.actions.repoCreate.bind(this)();
       }
       else if(this.get('isMilestone')){
-        this.actions.milestoneCreate.bind(this)();
+        return this.actions.milestoneCreate.bind(this)();
       }
       else if(this.get('isIssue')){
-        this.actions.issueCreate.bind(this)();
+        return this.actions.issueCreate.bind(this)();
       }
       else if(this.get('isUpdate')){
-        this.actions.giveUpdate.bind(this)();
+        return this.actions.giveUpdate.bind(this)();
       }
     },
     dismiss(){
@@ -53,8 +53,9 @@ export default Ember.Component.extend({
       this.set('new',null);
     },
     saveDismiss(){
-      this.actions.save.bind(this)();
-      this.actions.dismiss.bind(this)();
+      return this.actions.save.bind(this)().then(() => {
+        return this.actions.dismiss.bind(this)();
+      });
     },
     repoCreate(){
       let regex = /https:\/\/github.com\/(\w+?\/[\w|-]+)\/?.*/;
@@ -62,7 +63,7 @@ export default Ember.Component.extend({
 
       if(link){
         let id = link[1];
-        this.get('store').findRecord('repo', id).then(repo => {
+        return this.get('store').findRecord('repo', id).then(repo => {
           this.get('model.repos').addObject(repo);
           this.get('model.resources').addObject({
             route: repo.get('id'),
@@ -94,18 +95,21 @@ export default Ember.Component.extend({
       else if(this.get('new.minor')) {
         version[1]++;
       }
-      this.get('model.repos').forEach((repo) =>{
+
+      return this.get('model.repos').forEach((repo) =>{
         let milestone = {
           title: `V${version[0]}.${version[1]}.0`,
           description: this.get('new.description'),
         };
-        this.actions.sendRequest.bind(this)(JSON.stringify(milestone), repo.id, 'milestones')
+
+        return this.actions.sendRequest.bind(this)(JSON.stringify(milestone), repo.id, 'milestones')
           .then((response) => {
             let m = this.get('store').push(this.get('store').normalize( 'milestone', response) );
-            this.get('model.milestones').addObject(m);
+            return this.get('model.milestones').addObject(m);
+          }).then( () => {
+            return this.actions.cleanUp.bind(this)();
           });
       });
-      this.actions.cleanUp.bind(this)();
     },
     issueCreate(){
       if( this.get('new.title') && this.get('new.Milestone') && this.get('new.Repository') && this.get('new.Priority') && this.get('new.Type')){
@@ -122,7 +126,7 @@ export default Ember.Component.extend({
           labels: labels
         };
 
-        this.actions.sendRequest.bind(this)(JSON.stringify(issue), route, 'issues')
+        return this.actions.sendRequest.bind(this)(JSON.stringify(issue), route, 'issues')
         .then((response) => {
           let i = this.get('store').push(this.get('store').normalize( 'issue', response) );
           // i.get('labels').map((label) => label.substr(label.lastIndexOf("/")+1));
@@ -158,8 +162,8 @@ export default Ember.Component.extend({
           return null;
       }
       this.set('model.updateText', this.get('new.update'));
-      this.get('model').save().then(() =>{
-        this.actions.dismiss.bind(this)();
+      return this.get('model').save().then(() =>{
+        return this.actions.dismiss.bind(this)();
       });
     },
     cleanUp(){
