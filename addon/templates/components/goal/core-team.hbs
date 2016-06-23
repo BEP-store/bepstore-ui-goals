@@ -2,18 +2,18 @@
   <li class="mdl-list__item mdl-list__item--two-line">
     <span class="mdl-list__item-primary-content ">
       <i class="material-icons mdl-list__item-avatar">person</i>
-      <span>{{product_owner}} {{team.contributors.length}}</span>
+      <span>{{team.product_owner.name}} {{team.contributors.length}}</span>
       <span class="mdl-list__item-sub-title">Product Owner</span>
     </span>
   </li>
   <li class="mdl-list__item mdl-list__item--two-line">
     <span class="mdl-list__item-primary-content">
       <i class="material-icons mdl-list__item-avatar">person</i>
-      <span>{{if head_design head_design '?'}}</span>
+      <span>{{if team.head_design.name team.head_design.name '?'}}</span>
       <span class="mdl-list__item-sub-title">Design</span>
     </span>
     <span class="mdl-list__item-secondary-content">
-      {{#unless head_design}}
+      {{#unless team.head_design.name}}
         <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" type="button" {{action 'addContributor' 'design'}}>Join</button>
       {{/unless}}
     </span>
@@ -21,21 +21,21 @@
   <li class="mdl-list__item mdl-list__item--two-line">
     <span class="mdl-list__item-primary-content">
       <i class="material-icons mdl-list__item-avatar">person</i>
-      <span>{{if head_frontend head_frontend '?'}}</span>
+      <span>{{if team.head_frontend.name team.head_frontend.name '?'}}</span>
       <span class="mdl-list__item-sub-title">Front-end</span>
     </span>
 
-    {{#unless head_frontend}}
+    {{#unless team.head_frontend.name}}
       <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" type="button" {{action 'addContributor' 'frontend'}}>Join</button>
     {{/unless}}
   </li>
   <li class="mdl-list__item mdl-list__item--two-line">
     <span class="mdl-list__item-primary-content">
       <i class="material-icons mdl-list__item-avatar">person</i>
-      <span>{{if head_backend head_backend '?'}}</span>
+      <span>{{if team.head_backend.name team.head_backend.name '?'}}</span>
       <span class="mdl-list__item-sub-title">Back-end</span>
     </span>
-    {{#unless head_backend}}
+    {{#unless team.head_backend.name}}
       <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" type="button" {{action 'addContributor' 'backend'}}>Join</button>
     {{/unless}}
   </li>

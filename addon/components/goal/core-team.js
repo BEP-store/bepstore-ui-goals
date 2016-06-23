@@ -7,28 +7,11 @@ export default Ember.Component.extend({
   layout,
   session: service(),
   notify: service(),
-  store: service(),
-  product_owner: "",
-  head_design: "",
-  head_frontend: "",
-  head_backend: "",
+  account: service(),
 
-  setFunction: function(fullName){
-    this.get(`team.${fullName}`).then((user) => {
-      if(user){
-        this.set(fullName, user.get('name'));
-      } else {
-        this.set(fullName, "");
-      }
-    });
-  },
-
-  setFunctions: function() {
-    this.setFunction('product_owner');
-    this.setFunction('head_design');
-    this.setFunction('head_frontend');
-    this.setFunction('head_backend');
-  }.on('init'),
+  hasGithub: Ember.computed('account.me.identities.[]', function(){
+    return this.get('account').isAuthorized('github');
+  }),
 
   actions: {
     addContributor(role) {
@@ -38,7 +21,6 @@ export default Ember.Component.extend({
         this.get('team').set(r , this.get('session.user'));
       }
       this.get('team').save().then(() => {
-        this.setFunctions();
         this.get('notify').info('Hello there!');
       });
     }
