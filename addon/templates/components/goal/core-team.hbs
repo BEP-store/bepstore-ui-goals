@@ -50,7 +50,9 @@
       <i class="material-icons mdl-list__item-avatar">favorite</i>
       <span>
         {{#each team.contributors as |contributor|}}
-          {{contributor.name}}
+          <span class="comma-separated">
+            {{contributor.name}}
+          </span>
         {{/each}}
       </span>
       <span class="mdl-list__item-sub-title">Supporters</span>
