@@ -1,29 +1,46 @@
 import layout from 'bepstore-goals/templates/components/goal/core-team';
 import Ember from 'ember';
 
+const { inject: { service } } = Ember;
+
 export default Ember.Component.extend({
   layout,
-  poFlag: false,
-  hdFlag: false,
-  hfeFlag: false,
-  hbeFlag: false,
-  _po: "?",
-  _hd: "?",
-  _hfe: "?",
-  _hbe: "?",
+  session: service(),
+  notify: service(),
+  store: service(),
+  product_owner: "",
+  head_design: "",
+  head_frontend: "",
+  head_backend: "",
 
-  setFlags: Ember.on('init', function(){
-    let flagFn = function(fullName, shortName){
-      this.get(`team.${fullName}`).then((user) => {
-          if(user){
-            this.set(`_${shortName}`, user.get('name'));
-            this.toggleProperty(`${shortName}Flag`);
-          }
-        });
-    };
-    flagFn.bind(this)('product_owner','po');
-    flagFn.bind(this)('head_design','hd');
-    flagFn.bind(this)('head_frontend','hfe');
-    flagFn.bind(this)('head_backend','hbe');
-  })
+  setFunction: function(fullName){
+    this.get(`team.${fullName}`).then((user) => {
+      if(user){
+        this.set(fullName, user.get('name'));
+      } else {
+        this.set(fullName, "");
+      }
+    });
+  },
+
+  setFunctions: function() {
+    this.setFunction('product_owner');
+    this.setFunction('head_design');
+    this.setFunction('head_frontend');
+    this.setFunction('head_backend');
+  }.on('init'),
+
+  actions: {
+    addContributor(role) {
+      this.get('team.contributors').pushObject(this.get('session.user'));
+      if(role){
+        let r = `head_${role}`;
+        this.get('team').set(r , this.get('session.user'));
+      }
+      this.get('team').save().then(() => {
+        this.setFunctions();
+        this.get('notify').info('Hello there!');
+      });
+    }
+  }
 });

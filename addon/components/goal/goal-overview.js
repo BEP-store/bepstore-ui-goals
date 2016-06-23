@@ -13,13 +13,13 @@ export default Ember.Component.extend({
     },
     open() {
       if(this.get('activitiesShowRoute')){
-          this.get('router').transitionTo(this.get(this.get('activitiesShowRoute')), this.get('model.id'));
+        this.get('router').transitionTo(this.get(this.get('activitiesShowRoute')), this.get('model.id'));
 
       }
       else
       {
-          this.get('router').transitionTo(`${this.get('route')}.goal.show`, this.get('model.id'));
+        this.get('router').transitionTo(`${this.get('route')}.goal.show`, this.get('model.id'));
       }
     }
-  }
+}
 });

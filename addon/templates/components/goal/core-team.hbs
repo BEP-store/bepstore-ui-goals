@@ -2,29 +2,42 @@
   <li class="mdl-list__item mdl-list__item--two-line">
     <span class="mdl-list__item-primary-content ">
       <i class="material-icons mdl-list__item-avatar">person</i>
-      <span>{{_po}}</span>
+      <span>{{product_owner}} {{team.contributors.length}}</span>
       <span class="mdl-list__item-sub-title">Product Owner</span>
     </span>
   </li>
   <li class="mdl-list__item mdl-list__item--two-line">
     <span class="mdl-list__item-primary-content">
       <i class="material-icons mdl-list__item-avatar">person</i>
-      <span>{{_hd}}</span>
+      <span>{{if head_design head_design '?'}}</span>
       <span class="mdl-list__item-sub-title">Design</span>
     </span>
+    <span class="mdl-list__item-secondary-content">
+      {{#unless head_design}}
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" type="button" {{action 'addContributor' 'design'}}>Join</button>
+      {{/unless}}
+    </span>
   </li>
   <li class="mdl-list__item mdl-list__item--two-line">
     <span class="mdl-list__item-primary-content">
       <i class="material-icons mdl-list__item-avatar">person</i>
-      <span>{{_hfe}}</span>
+      <span>{{if head_frontend head_frontend '?'}}</span>
       <span class="mdl-list__item-sub-title">Front-end</span>
     </span>
+
+    {{#unless head_frontend}}
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" type="button" {{action 'addContributor' 'frontend'}}>Join</button>
+    {{/unless}}
   </li>
   <li class="mdl-list__item mdl-list__item--two-line">
     <span class="mdl-list__item-primary-content">
       <i class="material-icons mdl-list__item-avatar">person</i>
-      <span>{{_hbe}}</span>
+      <span>{{if head_backend head_backend '?'}}</span>
       <span class="mdl-list__item-sub-title">Back-end</span>
     </span>
+    {{#unless head_backend}}
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" type="button" {{action 'addContributor' 'backend'}}>Join</button>
+    {{/unless}}
   </li>
 </ul>
+{{ember-notify}}
