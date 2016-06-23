@@ -4,14 +4,15 @@ $width: 5%
 $bigwidth: 95% * (100% / $width)
 $margin: -0.52*($bigwidth - 100)
 
-.challenges_item
-  margin-bottom: 20px
+// .challenges_item
+//  width: 100%
 
 .timeline_container
-  font-size: 20px
-  width: $width
-  margin-left: auto
-  margin-right: auto
+  width: 100%
+//   font-size: 20px
+//   width: $width
+//   margin-left: auto
+//   margin-right: auto
 
 .challenge_description
   width: 90%
@@ -23,11 +24,22 @@ $margin: -0.52*($bigwidth - 100)
 
 .subchallenge_container
   display: inline-block
-  border: 1px solid grey
-  width: $bigwidth
-  margin-left: $margin
-  margin-bottom: 10px
-  padding: 15px
+  // border: 1px solid grey
+  width: 98%
+  margin: 1%
+  // width: $bigwidth
+  // margin-left: $margin
+  // margin-bottom: 10px
+  // padding: 15px
+
+progress[value]:after
+ content: attr(value) '%'
+ color: white
+ mix-blend-mode: difference
+ font-size: 0.8em
+ position: absolute
+ bottom: 0.5em
+ left: 0.5em
 
 .overflow-container
  overflow-x: auto
@@ -55,8 +67,8 @@ $margin: -0.52*($bigwidth - 100)
   width: 77%
   float: left
 
-.done
-  background-color: green
+// .done
+//   background-color: green
 
 .menu_item
   height: 30px

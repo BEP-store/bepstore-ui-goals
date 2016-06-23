@@ -5,7 +5,15 @@ const { inject: { service } } = Ember;
 
 export default Ember.Component.extend({
   layout,
+  session: service(),
   router: service(),
+
+  favStatus: Ember.computed('model', function(){
+      if(!this.get('model.contributors').isAny('id', this.get('session.user.id'))) {
+          return 'favorite border';
+      }
+      return 'favorite';
+  }),
 
   actions: {
     showDescr() {
@@ -13,13 +21,13 @@ export default Ember.Component.extend({
     },
     open() {
       if(this.get('activitiesShowRoute')){
-          this.get('router').transitionTo(this.get(this.get('activitiesShowRoute')), this.get('model.id'));
+        this.get('router').transitionTo(this.get(this.get('activitiesShowRoute')), this.get('model.id'));
 
       }
       else
       {
-          this.get('router').transitionTo(`${this.get('route')}.goal.show`, this.get('model.id'));
+        this.get('router').transitionTo(`${this.get('route')}.goal.show`, this.get('model.id'));
       }
     }
-  }
+}
 });

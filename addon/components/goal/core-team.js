@@ -1,29 +1,40 @@
 import layout from 'bepstore-goals/templates/components/goal/core-team';
 import Ember from 'ember';
 
+const { inject: { service } } = Ember;
+
 export default Ember.Component.extend({
   layout,
-  poFlag: false,
-  hdFlag: false,
-  hfeFlag: false,
-  hbeFlag: false,
-  _po: "?",
-  _hd: "?",
-  _hfe: "?",
-  _hbe: "?",
+  session: service(),
+  notify: service(),
+  account: service(),
 
-  setFlags: Ember.on('init', function(){
-    let flagFn = function(fullName, shortName){
-      this.get(`team.${fullName}`).then((user) => {
-          if(user){
-            this.set(`_${shortName}`, user.get('name'));
-            this.toggleProperty(`${shortName}Flag`);
-          }
-        });
-    };
-    flagFn.bind(this)('product_owner','po');
-    flagFn.bind(this)('head_design','hd');
-    flagFn.bind(this)('head_frontend','hfe');
-    flagFn.bind(this)('head_backend','hbe');
-  })
+  hasGithub: Ember.computed('account.me.identities.[]', function(){
+    return this.get('account').isAuthorized('github');
+  }),
+
+  isLoggedIn: Ember.computed('session.user', function(){
+    return !!this.get('session.user.id');
+  }),
+
+  missesGithub: Ember.computed('hasGithub', 'isLoggedIn', function(){
+    return this.get('isLoggedIn') && !this.get('hasGithub');
+  }),
+
+  isContributor: Ember.computed('team.contributors', 'session.user', function(){
+      return this.get('team.contributors').isAny('id', this.get('session.user.id'));
+  }),
+
+  actions: {
+    addContributor(role) {
+      this.get('team.contributors').pushObject(this.get('session.user'));
+      if(role){
+        let r = `head_${role}`;
+        this.get('team').set(r , this.get('session.user'));
+      }
+      this.get('team').save().then(() => {
+        this.get('notify').info('Hello there!');
+      });
+    }
+  }
 });

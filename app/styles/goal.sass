@@ -5,50 +5,28 @@ $spacehorizontal: 5%
 .ember-text-field, .ember-text-area
   color: black
 
-.circle
- background-color: black
- color: white
- border-radius: 50%
- padding-top: 25px
- height: 75px
- width: 100px
- position: absolute
+.core-team-list li
+ width: 49%
+ display: inline-flex
 
-.PO
- left: $spacehorizontal
- top: $spacevertical + 100px
-
-.HD
- right: $spacehorizontal
- top: $spacevertical + 180px
-
-.HFE
- left: $spacehorizontal
- top: $spacevertical + 260px
-
-.HBE
- right: $spacehorizontal
- top: $spacevertical + 340px
-
+.vbottom
+ vertical-align: bottom
 
 .status_badge
  text-align: center
  color: white
  border: 1px solid black
  margin-right: 5px
- float: right
 
 .big_badge
- font-size: 21px
- width: 210px
- padding: 4.5px
- margin-top: -44.5px
+ color: white
 
 .small_badge
- font-size: 16px
- width: 160px
- padding: 2px
- margin-top: -20px
+ color: white
+ // margin-top: -20px
+
+.inline-block
+  display: inline-block
 
 .status_init
  background-color: #cc5490
@@ -59,18 +37,18 @@ $spacehorizontal: 5%
 .status_building
  background-color: blue
 
-.red, .status_testing
+.red .status_testing
  background-color: red
 
 .status_finished
  background-color: green
 
 .goal_container
- text-align: center
+ // text-align: center
  width: 100%
  display: inline-block
- .mdl-button
-  background-color: green
+ // .mdl-button
+ //  background-color: green
 
 .goal_left
  width: 74%
@@ -112,3 +90,11 @@ $spacehorizontal: 5%
  display: inline-block
  h2
   margin-top: 5px
+
+.core-team-list .full-width
+ width: 98.5%
+
+li .comma-separated:after
+ content: ', '
+li .comma-separated:last-of-type:after
+ content: ' '

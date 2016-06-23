@@ -15,7 +15,7 @@ export default Ember.Component.extend({
         this.get('model').set(r , this.get('session.user'));
       }
       this.get('model').save().then(() => {
-          alert("you have been refruited!!! ");
+        this.get('notify').info('Hello there!');
       });
     }
   }
