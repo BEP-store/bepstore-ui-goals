@@ -13,9 +13,11 @@
       <span class="mdl-list__item-sub-title">Design</span>
     </span>
     <span class="mdl-list__item-secondary-content">
-      {{#unless team.head_design.name}}
-        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" type="button" {{action 'addContributor' 'design'}}>Join</button>
-      {{/unless}}
+      {{#if isLoggedIn}}
+        {{#unless team.head_design.name}}
+          <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" type="button" {{action 'addContributor' 'design'}}>Join</button>
+        {{/unless}}
+      {{/if}}
     </span>
   </li>
   <li class="mdl-list__item mdl-list__item--two-line">
@@ -25,9 +27,11 @@
       <span class="mdl-list__item-sub-title">Front-end</span>
     </span>
 
-    {{#unless team.head_frontend.name}}
-      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" type="button" {{action 'addContributor' 'frontend'}}>Join</button>
-    {{/unless}}
+    {{#if isLoggedIn}}
+      {{#unless team.head_frontend.name}}
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" type="button" {{action 'addContributor' 'frontend'}}>Join</button>
+      {{/unless}}
+    {{/if}}
   </li>
   <li class="mdl-list__item mdl-list__item--two-line">
     <span class="mdl-list__item-primary-content">
@@ -35,9 +39,11 @@
       <span>{{if team.head_backend.name team.head_backend.name '?'}}</span>
       <span class="mdl-list__item-sub-title">Back-end</span>
     </span>
-    {{#unless team.head_backend.name}}
-      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" type="button" {{action 'addContributor' 'backend'}}>Join</button>
-    {{/unless}}
+    {{#if isLoggedIn}}
+      {{#unless team.head_backend.name}}
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" type="button" {{action 'addContributor' 'backend'}}>Join</button>
+      {{/unless}}
+    {{/if}}
   </li>
 </ul>
 {{ember-notify}}

@@ -13,6 +13,14 @@ export default Ember.Component.extend({
     return this.get('account').isAuthorized('github');
   }),
 
+  isLoggedIn: Ember.computed('session.user', function(){
+    return !!this.get('session.user.id');
+  }),
+
+  missesGithub: Ember.computed('hasGithub', 'isLoggedIn', function(){
+    return this.get('isLoggedIn') && !this.get('hasGithub');
+  }),
+  
   actions: {
     addContributor(role) {
       this.get('team.contributors').pushObject(this.get('session.user'));
