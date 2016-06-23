@@ -15,7 +15,7 @@
     <div class="fbf-modal__content">
       {{#if isRepo}}
         {{component 'bepstore-goals@challenges/add/add-repo' model=new}}
-      {{else if isMilestone}}
+      {{else if isChallenge}}
         {{component 'bepstore-goals@challenges/add/add-milestone' model=new}}
       {{else if isIssue}}
         {{component 'bepstore-goals@challenges/add/add-issue' new=new model=model}}

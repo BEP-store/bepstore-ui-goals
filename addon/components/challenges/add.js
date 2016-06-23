@@ -13,7 +13,7 @@ export default Ember.Component.extend({
   ajax: service(),
 
   isRepo: equal('type', 'Repository'),
-  isMilestone: equal('type', 'Milestone'),
+  isChallenge: equal('type', 'Challenge'),
   isIssue: equal('type', 'Issue'),
   isUpdate: equal('type', 'Update'),
 
@@ -38,8 +38,8 @@ export default Ember.Component.extend({
       if(this.get('isRepo')){
         return this.actions.repoCreate.bind(this)();
       }
-      else if(this.get('isMilestone')){
-        return this.actions.milestoneCreate.bind(this)();
+      else if(this.get('isChallenge')){
+        return this.actions.challengeCreate.bind(this)();
       }
       else if(this.get('isIssue')){
         return this.actions.issueCreate.bind(this)();
@@ -75,7 +75,7 @@ export default Ember.Component.extend({
         return null;
       }
     },
-    milestoneCreate(){
+    challengeCreate(){
       if(!this.get('new.description')){
         return null;
       }

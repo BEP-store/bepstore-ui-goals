@@ -28,8 +28,8 @@ export default Component.extend(ClickOutside, {
       this.get('add')("Repository");
       this.toggleProperty('_isBottomSheetShown');
     },
-    addMilestone(){
-      this.get('add')("Milestone");
+    addChallenge(){
+      this.get('add')("Challenge");
       this.toggleProperty('_isBottomSheetShown');
     },
     addIssue(){
@@ -38,7 +38,7 @@ export default Component.extend(ClickOutside, {
     },
     addUpdate(){
       this.get('add')("Update");
-      this.toggleProperty('_isBottomSheetShown');      
+      this.toggleProperty('_isBottomSheetShown');
     }
   },
 
