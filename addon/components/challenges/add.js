@@ -2,7 +2,7 @@ import layout from 'bepstore-goals/templates/components/challenges/add';
 import semver from 'bepstore-goals/utils/semver';
 import Ember from 'ember';
 
-const { computed: { equal }, inject: { service } } = Ember;
+const { computed: { equal }, inject: { service }, RSVP } = Ember;
 
 export default Ember.Component.extend({
   layout,
@@ -49,8 +49,8 @@ export default Ember.Component.extend({
       }
     },
     dismiss(){
-      this.sendAction('close');
       this.set('new',null);
+      this.sendAction('close');
     },
     saveDismiss(){
       return this.actions.save.bind(this)().then(() => {
@@ -58,7 +58,7 @@ export default Ember.Component.extend({
       });
     },
     repoCreate(){
-      let regex = /https:\/\/github.com\/(\w+?\/[\w|-]+)\/?.*/;
+      let regex = /https:\/\/github.com\/([\w|-]+?\/[\w|-]+)\/?.*/;
       let link = this.get('new.link').match(regex);
 
       if(link){
@@ -66,18 +66,18 @@ export default Ember.Component.extend({
         return this.get('store').findRecord('repo', id).then(repo => {
           this.get('model.repos').addObject(repo);
           this.actions.setLabels.bind(this)(repo);
-          this.get('model').save().then(() => {
-            this.actions.cleanUp.bind(this)();
+          return this.get('model').save().then(() => {
+            return this.actions.cleanUp.bind(this)();
           });
         });
       }
       else{
-        return null;
+        throw new Error('Invalid repository link.');
       }
     },
     challengeCreate(){
       if(!this.get('new.description')){
-        return null;
+        return RSVP.resolve(null);
       }
       let last = this.get('model.challenges.lastObject.title');
       let version = [0,0,0];
@@ -101,6 +101,7 @@ export default Ember.Component.extend({
         return this.actions.sendRequest.bind(this)(JSON.stringify(milestone), repo.id, 'milestones')
           .then((response) => {
             let m = this.get('store').push(this.get('store').normalize( 'milestone', response) );
+            m.set('repo', repo);
             return this.get('model.milestones').addObject(m);
           }).then( () => {
             return this.actions.cleanUp.bind(this)();
@@ -130,16 +131,17 @@ export default Ember.Component.extend({
           this.get('model.challenges')
                 .findBy('title', milestone.get('title'))
                 .issues.addObject(i);
-          this.actions.cleanUp.bind(this)();
+
+          return this.actions.cleanUp.bind(this)();
         });
       }
       else {
-        return null;
+        throw new Error('Something went wrong during issue creation.');
       }
     },
     giveUpdate(){
       if(!this.get('new.update')){
-        return null;
+        return RSVP.resolve(null);
       }
       switch (this.get('new.Status')) {
         case 'specifying (sub-)challenges':
