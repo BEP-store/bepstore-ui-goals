@@ -10,7 +10,7 @@ export default Component.extend({
 
 	addType:null,
 
-	isCoreMember: Ember.computed('session.user', function(){
+	isCoreMember: Ember.computed('session.user', 'model.contributors', function(){
 		let id = this.get('session.user.id');
 		return (id === this.get('model.product_owner.id')) || (id === this.get('model.head_design.id')) || (id === this.get('model.head_frontend.id')) || (id === this.get('model.head_backend.id'));
 	}),
