@@ -13,7 +13,8 @@
   </div>
 {{/if}}
 <div class="mdl-card__menu">
-    {{mdl-icon badge=model.contributors.length icon='group' class='mdl-badge--overlap vbottom '}}
+    {{mdl-icon badge=model.contributors.length icon=favStatus class='mdl-badge--overlap vbottom '}}  
+
     {{component 'bepstore-goals@badge/status-badge' status=model.status size='small' class='inline-block'}}
     {{#if showAll}}
       {{mdl-button icon='expand_less' isColored=false action='showDescr'}}

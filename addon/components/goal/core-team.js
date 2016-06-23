@@ -20,7 +20,11 @@ export default Ember.Component.extend({
   missesGithub: Ember.computed('hasGithub', 'isLoggedIn', function(){
     return this.get('isLoggedIn') && !this.get('hasGithub');
   }),
-  
+
+  isContributor: Ember.computed('team.contributors', 'session.user', function(){
+      return this.get('team.contributors').isAny('id', this.get('session.user.id'));
+  }),
+
   actions: {
     addContributor(role) {
       this.get('team.contributors').pushObject(this.get('session.user'));

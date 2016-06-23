@@ -5,7 +5,15 @@ const { inject: { service } } = Ember;
 
 export default Ember.Component.extend({
   layout,
+  session: service(),
   router: service(),
+
+  favStatus: Ember.computed('model', function(){
+      if(!this.get('model.contributors').isAny('id', this.get('session.user.id'))) {
+          return 'favorite border';
+      }
+      return 'favorite';
+  }),
 
   actions: {
     showDescr() {
