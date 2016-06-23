@@ -13,5 +13,9 @@ export default ActivitiesBaseDetailView.extend({
       return this.get('model.contributors').isAny('id', this.get('session.user.id'));
     }
     return false;
+  }),
+
+  hasRepos: Ember.computed('model.repos', function() {
+    return this.get('model.repos.length') > 0;
   })
 });
